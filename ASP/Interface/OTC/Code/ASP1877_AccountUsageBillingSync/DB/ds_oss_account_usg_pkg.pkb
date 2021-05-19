@@ -328,7 +328,7 @@ CREATE OR REPLACE PACKAGE BODY ds_oss_account_usg_pkg AS
                 BEGIN
                     UPDATE fusionintegration.oss_stitch_payload_stg
                     SET
-                        status = 'Warning',
+                        status = 'W',
                         message = errmsg
                                   || '.Please refer table OSS_ACCOUNTUSAGE_CORE_ERROR for INSTANCE_ID : '
                                   || p_instance_id
