@@ -1,12 +1,12 @@
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-       OSS_STITCH_PAYLOAD_STG TABLE SCRIPT
+       TABLE TYPE SCRIPT
        $Version 1.0
    REM ============================================================================
    REM
-   REM NAME...: OSS_STITCH_PAYLOAD_STG
+   REM NAME...: TABLE TYPE
 
    REM
-   REM DESC...: Stage Table for ASP-1877 Account Billing Usage Sync
+   REM DESC...: Table type for ASP-1877 Account Billing Usage Sync
    REM
    REM
    REM FILES..: none
@@ -15,28 +15,28 @@
    REM
    REM WHO                  WHAT                                                 WHEN
    REM --------------       ----------------------------------------------      ----------
-   REM Rohit Srivastava     Stage Table to store S3 payload information         03/05/2021
+   REM Rohit Srivastava     Table Type for Usage Data                           03/05/2021
    REM
    REM ===============================================================================
    REM
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-DROP TABLE "FUSIONINTEGRATION"."OSS_STITCH_PAYLOAD_STG";
+DROP TYPE "fusionintegration"."usagedata_rec_type" ;
+/
+CREATE OR REPLACE TYPE "fusionintegration"."usagedata_rec_type" AS OBJECT (
+    record_id    NUMBER,
+    dsaccountid  VARCHAR2(240),
+    uom          VARCHAR2(50),
+    uom_source   VARCHAR2(120),
+    quantity     NUMBER,
+    usagedate    VARCHAR2(16),
+    usageid      VARCHAR2(240)
+);
+/
+DROP TYPE "fusionintegration"."usagedata_tbl_type";
 / 
-
-CREATE TABLE "FUSIONINTEGRATION"."OSS_STITCH_PAYLOAD_STG" 
-   (            
-   record_id        NUMBER,
-    run_date_time    TIMESTAMP,
-    interface_id     VARCHAR2(10),
-    interface_name   VARCHAR2(120),
-    instance_id      VARCHAR2(20),
-    trackingid       VARCHAR2(240),
-    s3downloadlink   VARCHAR2(4000),
-    status 	     VARCHAR2(4),
-    message 	     VARCHAR2(20000)
-   );
+CREATE OR REPLACE TYPE usagedata_tbl_type AS TABLE OF usagedata_rec_type;
 /
 SHOW ERRORS
 /
