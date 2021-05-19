@@ -34,15 +34,16 @@ CREATE TABLE "FUSIONINTEGRATION"."OSS_ACCOUNTUSAGE_CORE_STG"
     quantity               NUMBER,
     usagedate              VARCHAR2(16),
     usageid                VARCHAR2(240),
-    run_date_time          VARCHAR2(100),
+    TRACKINGID             VARCHAR2(240),
+    run_date_time          TIMESTAMP,
     interface_id           VARCHAR2(10),
     interface_name         VARCHAR2(120),
     instance_id            VARCHAR2(20),
     schedule_instance_id   VARCHAR2(20),
     process_flag           VARCHAR2(2),
-    message                VARCHAR2(4000),
-    PRIMARY KEY ( record_id,instance_id )
+    message                VARCHAR2(20000),
+    CONSTRAINT "UNIQUE_USAGEID" UNIQUE ("USAGEID")
    );
 /
-SHOW ERRORS;
+SHOW ERRORS
 /
