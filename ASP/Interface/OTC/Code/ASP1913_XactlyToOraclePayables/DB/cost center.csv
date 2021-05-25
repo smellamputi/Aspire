@@ -1,0 +1,140 @@
+COST_CENTER,SOURCESYSTEMID,DESCRIPTION
+0000,000,Default
+1111,130,Technical Operations
+1121,140,Product Operations
+1211,100,Professional Services
+1212,101,Real Estate Prof Services
+1213,102,Partner Success
+1214,110,Customer Success
+1221,160,Customer Readiness 
+1231,181,Enterprise CSM 
+1232,182,Commercial CSM 
+1233,183,Digital CSM 
+1234,170,Customer Value Management 
+1241,120,Customer Service 
+1242,121,Enterprise Support 
+1243,122,Technical Support 
+1244,123,Subscription Management Support 
+1251,152,Customer Success Operations 
+1261,150,Operations - Digital Certs 
+1262,151,Services Management 
+1226,180,Customer Success Managers 
+1911,199,COS Allocation - Subscription 
+1921,198,COS Allocation - ProServ 
+2111,200,Corporate Admin 
+2121,220,HR Management 
+2122,222,Talent Development 
+2123,223,Total Rewards 
+2124,224,HR Operations 
+2125,225,HRBP 
+2126,221,Recruiting 
+2131,230,Legal Management 
+2132,231,Security Empl & Litig 
+2133,232,IP Prod & Reg Affairs 
+2134,233,Global Contract 
+2141,245,Security and Workplace Services 
+2142,270,Real Estate & Workplace Srv 
+2151,210,Finance Management 
+2152,211,Accounting 
+2153,212,Revenue Ops 
+2154,213,FP&A 
+2155,214,Finance Ops 
+2156,215,Investor Relations 
+2157,216,Internal Audit 
+2161,201,Corporate Development 
+2211,240,Risk Management 
+2221,249,Global Operations 
+2231,250,Information Technology 
+2241,251,Enterprise Applications 
+2251,253,Information Security 
+2261,260,Business Operations 
+2271,280,Program Management 
+2311,252,Business Intelligence 
+2811,999,Allocated Costs 
+2911,299,G&A Allocation 
+3111,300,Prod Dev: Platform 
+3121,302,Prod Dev: Infra Engineering 
+3141,311,Prod Dev: RE & Dig Closing 
+3151,312,Prod Dev: RON 
+3181,380,Prod Dev: Eng Services 
+3191,390,Prod Dev MGMT 
+3211,301,Global Partner Solutions 
+3231,340,Prod Dev: CLM 
+3241,350,Prod Dev: Identity 
+3251,370,Prod Dev: Incubation 
+3911,399,R&D Allocation 
+4111,500,Sales Management 
+4212,505,Commercial Major AE 
+4213,508,Commercial MM AE 
+4214,509,Commercial SMB AE 
+4215,507,Commercial Verticals AE 
+4216,537,Commercial FinServ AE 
+4217,541,Commercial HLS AE 
+4218,506,Commercial EMG Verts AE
+4219,533,SMG Public Sector AE 
+4222,532,Commercial Major AE Mgt 
+4223,528,Commercial MM AE Mgt
+4224,529,Commercial SMB AE Mgt
+4225,527,Commercial Verticals AE Mgt 
+4226,538,Commercial FinServ AE Mgt 
+4227,542,Commercial HLS AE Mgt 
+4228,536,Commercial EMG Verts AE Mgt
+4229,539,SMG Public  Sector AE Mgt 
+4251,553,Commercial MDR Mgmt 
+4252,552,Commercial SDR Mgmt 
+4266,562,Commercial SE Support 
+4311,510,Enterprise Sales AE 
+4313,502,Enterprise Verticals AE 
+4314,504,Enterprise FinServ AE 
+4315,503,Enterprise Public Sector AE 
+4316,514,Enterprise ECS 
+4321,515,Enterprise Sales AE Mgt 
+4323,518,Enterprise Verticals AE Mgt 
+4324,534,Enterprises FinServ AEs Mgt 
+4325,519,Enterprise Pub Sec AE Mgt 
+4341,513,Enterprise MDR 
+4351,543,Enterprise MDR Mgmt 
+4362,563,Enterprise SE Support 
+4411,550,Business Development 
+4412,575,Real Estate Sales Management 
+4421,551,Channel Sales 
+4511,570,Agreement Cloud Strat & Sol 
+4611,530,Sales Operations 
+4621,531,GTM Productivity 
+4631,535,GTM Enablement 
+4651,545,Engagement Manager 
+4661,546,Professional Sercices Ops 
+4662,547,SI Partners Management 
+4911,599,Sales Allocation 
+5111,400,Marketing Strategy 
+5121,410,Corporate Marketing 
+5133,445,Search Marketing 
+5134,420,Field Marketing 
+5151,435,Partner Marketing 
+5171,470,Website Development 
+5172,475,Web Marketing 
+5181,480,Creative Brand Marketing 
+5191,455,Segment Marketing 
+5911,499,Marketing Allocation 
+3131,310,Prod Dev: Agree (Sign)
+3161,320,Prod Dev: Developer Program
+3171,330,Prod Dev: Manage & Optimize
+3221,304,Prod Dev: Design & Research
+4211,520,Corporate Sales AE
+4221,525,Corporate Sales AE Mgt
+4231,521,Corporate Renewal Managers
+4232,526,Corporate Sales RM Mgt
+4241,522,Corp SDR
+4242,523,Corp MDR
+4261,560,Sales Engineering - Corp
+4312,501,Enterprise Geos AE
+4322,517,Enterprise Geos AE Mgt
+4331,511,Enterprise Renewal Managers
+4332,516,Enterprise Sales RM Mgt
+4361,561,Sales Engineering - Ent
+4641,540,Sales Education
+5131,415,Integrated Marketing
+5132,440,Lead Generation
+5141,430,Product Marketing
+5143,460,Audience Marketing
+5161,450,eCommerce
