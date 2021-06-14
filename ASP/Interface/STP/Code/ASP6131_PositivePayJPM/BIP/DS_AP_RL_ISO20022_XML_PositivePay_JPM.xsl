@@ -40,7 +40,7 @@
                                 <xsl:choose>
                                     <xsl:when test="(PaymentStatus/Code='ISSUED')">
                                         <xsl:value-of select="count(/PositivePayDataExtract/OutboundPayment/PaymentStatus
-							[Code='VOID'])" />
+							[Code='ISSUED'])" />
                                     </xsl:when>
                                     <xsl:when test="(PaymentStatus/Code='VOID')">
                                         <xsl:value-of select="count(/PositivePayDataExtract/OutboundPayment/PaymentStatus
