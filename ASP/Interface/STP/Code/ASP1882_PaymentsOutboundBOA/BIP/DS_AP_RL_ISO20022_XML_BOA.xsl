@@ -229,7 +229,7 @@
                                     <xsl:when test="(Payer/LegalEntityName='ARX Inc.')">
                                         <xsl:value-of select="concat('BOA_ARX_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='SpringCM, Inc.')">
+                                    <xsl:when test="(Payer/LegalEntityName='SpringCM Inc.')">
                                         <xsl:value-of select="concat('BOA_SCM_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                     <xsl:when test="(Payer/LegalEntityName='DocuSign Brazil LLC-')">
@@ -870,7 +870,7 @@
                                             </xsl:if>
                                         </xsl:if>
                                     </Id>
-                                    <xsl:if test="(($TMPT='US ACH CCD')  or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='JP PAYACH'))">
+                                    <xsl:if test="(($TMPT='US ACH CCD')  or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC'))">
                                         <Tp>
                                             <Cd>
                                                 <xsl:choose>
@@ -884,6 +884,23 @@
                                             </Cd>
                                         </Tp>
                                     </xsl:if>
+									 <xsl:if test="(($TMPT='JP PAYACH'))">
+                                        <Tp>
+                                            <Cd>
+                                                <xsl:choose>
+                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='CHECKING') or (PayeeBankAccount/BankAccountType/Code='') or (PayeeBankAccount/BankAccountType/Code='UNKNOWN')">
+                                                        <xsl:text>CACC</xsl:text>
+                                                    </xsl:when>
+                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='SAVINGS')">
+                                                        <xsl:text>SVGS</xsl:text>
+                                                    </xsl:when>
+                                                </xsl:choose>
+                                            </Cd>
+                                        </Tp>
+                                    </xsl:if>
+									
+									
+									
                                     <xsl:if test="(($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)'))">
                                         <Ccy>
                                             <xsl:value-of select="PayeeBankAccount/BankAccountCurrency/Code" />
@@ -927,6 +944,8 @@
 								<xsl:variable name="BankCountry">
 									<xsl:value-of select="BankAccount/BankAddress/Country" />
 								</xsl:variable>
+								
+								 <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)')  or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='US ACH CCD'))">
 								
                                 <RmtInf>
                                     <xsl:for-each select="DocumentPayable">
@@ -1011,6 +1030,7 @@
                                         </xsl:if>
                                     </xsl:for-each>
                                 </RmtInf>
+								</xsl:if>
                             </CdtTrfTxInf>
                        
                     </PmtInf>
