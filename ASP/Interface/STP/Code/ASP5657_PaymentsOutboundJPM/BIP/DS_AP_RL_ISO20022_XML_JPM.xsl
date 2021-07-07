@@ -590,7 +590,8 @@
                                                         <CdOrPrtry>
                                                             <Cd>
                                                                 <xsl:choose>
-                                                                    <xsl:when test="(DocumentType/Code='STANDARD') or (DocumentType/Code='INTEREST')">
+                                                                    <xsl:when test="(DocumentType/Code='STANDARD') or 
+																	(DocumentType/Code='INTEREST') or (DocumentType/Code='PAYMENT REQUEST')">
                                                                         <xsl:text>CINV</xsl:text>
                                                                     </xsl:when>
                                                                     <xsl:when test="(DocumentType/Code='CREDIT')">
@@ -653,9 +654,9 @@
                                                 </RfrdDocAmt>
                                                <xsl:if test="($TMPT='US Outsourced Check')">
 											  
-											 <xsl:if test="not(RemittanceMessage='')">
+											 <xsl:if test="not(/OutboundPaymentInstruction/OutboundPayment/DocumentPayable/RemittanceMessage='')">
                                             <AddtlRmtInf>
-											        <xsl:value-of select="substring(RemittanceMessage,1,140)" />
+											        <xsl:value-of select="substring(/OutboundPaymentInstruction/OutboundPayment/DocumentPayable/RemittanceMessage,1,140)" />
 											</AddtlRmtInf>
                                         </xsl:if>
 										

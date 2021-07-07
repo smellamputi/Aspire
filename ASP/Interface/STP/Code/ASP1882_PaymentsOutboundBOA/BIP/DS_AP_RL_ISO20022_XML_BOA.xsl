@@ -68,7 +68,10 @@
                                 <xsl:when test="InstructionGrouping/Payer/Address/Country='JP'">
                                     <xsl:value-of select="substring(upper-case(InstructionGrouping/Payer/LegalEntityName),1,140)" />
                                 </xsl:when>
-                                <xsl:otherwise>
+								 <xsl:when test="InstructionGrouping/Payer/LegalEntityName='DocuSign International, Inc. (Australia Branch)'">
+                                    <xsl:text>DocuSign International, Inc.</xsl:text>
+                                </xsl:when>
+								<xsl:otherwise>
                                     <xsl:value-of select="substring(InstructionGrouping/Payer/LegalEntityName,1,140)" />
                                 </xsl:otherwise>
                             </xsl:choose>
@@ -217,7 +220,7 @@
                                     <xsl:when test="(Payer/LegalEntityName='DocuSign, Inc.')">
                                         <xsl:value-of select="concat('BOA_DSI_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign International (EMEA) Limited (Ireland)')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign International (EMEA) Limited')">
                                         <xsl:value-of select="concat('BOA_DIE_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                     <xsl:when test="(Payer/LegalEntityName='DocuSign International, Inc.')">
@@ -229,43 +232,43 @@
                                     <xsl:when test="(Payer/LegalEntityName='ARX Inc.')">
                                         <xsl:value-of select="concat('BOA_ARX_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='SpringCM, Inc.')">
+                                    <xsl:when test="(Payer/LegalEntityName='SpringCM Inc.')">
                                         <xsl:value-of select="concat('BOA_SCM_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Brazil LLC-')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Brazil LLC')">
                                         <xsl:value-of select="concat('BOA_DBS_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='Seal Software Inc (US)')">
+                                    <xsl:when test="(Payer/LegalEntityName='Seal Software, Inc.')">
                                         <xsl:value-of select="concat('BOA_SSI_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='Liveoak Technologies, Inc')">
+                                    <xsl:when test="(Payer/LegalEntityName='Liveoak Technologies, Inc.')">
                                         <xsl:value-of select="concat('BOA_LOT_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign International (Asia-Pacific) Pte Ltd')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign International (Asia-Pacific) Private Limited')">
                                         <xsl:value-of select="concat('BOA_DIP_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DII Australia Branch')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign International, Inc. (Australia Branch)')">
                                         <xsl:value-of select="concat('BOA_DAB_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Japan KK')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Japan K.K.')">
                                         <xsl:value-of select="concat('BOA_DSJ_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign UK Ltd')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign UK Limited')">
                                         <xsl:value-of select="concat('BOA_DUK_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                     <xsl:when test="(Payer/LegalEntityName='DocuSign Germany GmbH')">
                                         <xsl:value-of select="concat('BOA_DSG_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DS France SAS')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign France SAS')">
                                         <xsl:value-of select="concat('BOA_DSF_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='Seal Software Group (Holding) Ltd')">
+                                    <xsl:when test="(Payer/LegalEntityName='Seal Software Group Limited')">
                                         <xsl:value-of select="concat('BOA_SSG_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                     <xsl:when test="(Payer/LegalEntityName='Seal Software Limited (UK)')">
                                         <xsl:value-of select="concat('BOA_SSL_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='Contract Analytics Development Sweden')">
+                                    <xsl:when test="(Payer/LegalEntityName='Contract Analytics Development Sweden AB')">
                                         <xsl:value-of select="concat('BOA_CAD_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                     <xsl:when test="(Payer/LegalEntityName='Seal Software Norway AS')">
@@ -280,13 +283,13 @@
                                     <xsl:when test="(Payer/LegalEntityName='Seal Software Egypt LLC')">
                                         <xsl:value-of select="concat('BOA_SSE_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Brasil Participacoes Ltda')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Brasil Participacoes Ltda.')">
                                         <xsl:value-of select="concat('BOA_DBP_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                     <xsl:when test="(Payer/LegalEntityName='DocuSign Brasil Solucoes em Tecnologia Ltda.')">
                                         <xsl:value-of select="concat('BOA_DSS_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
-                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Mexico')">
+                                    <xsl:when test="(Payer/LegalEntityName='DocuSign Mexico S. de R.L. de C.V.')">
                                         <xsl:value-of select="concat('BOA_DSM_',$pymtd,'_',$instrid,'_',PaymentNumber/PaymentReferenceNumber)" />
                                     </xsl:when>
                                 </xsl:choose>
@@ -389,6 +392,9 @@
 										<xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
                                             <xsl:value-of select="substring(upper-case(Payer/Name),1,140)" />
                                         </xsl:when>
+										<xsl:when test="Payer/Name='DocuSign International, Inc. (Australia Branch)'">
+                                        <xsl:text>DocuSign International, Inc.</xsl:text>
+                                      </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="substring(Payer/Name,1,140)" />
                                         </xsl:otherwise>
@@ -455,23 +461,26 @@
                                 </xsl:if>
                                 <xsl:if test="(($TMPT='IE / FR / DE SEPA') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
                                     
-                                        
+                                        <xsl:if test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
 										<xsl:choose>
-										<xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-										<xsl:if test="not(Payer/Address/AddressLine2='')">
+										
+										
+										<xsl:when test="not(Payer/Address/AddressLine2='')">
+										
 										<AdrLine>
-                                            <xsl:value-of select="substring(Payer/Address/AddressLine2,1,70)" />
+                                            <xsl:value-of select="substring(concat(Payer/Address/AddressLine2,',',Payer/Address/AddressLine3),1,70)" />
 										</AdrLine>
-										</xsl:if>
+										
 										</xsl:when>
 										<xsl:otherwise>
 										<xsl:if test="not(Payer/Address/AddressLine1='')">
 										<AdrLine>
-										<xsl:value-of select="substring(concat(Payer/Address/AddressLine1,' ',Payer/Address/AddressLine2),1,70)" />
+										<xsl:value-of select="substring(Payer/Address/AddressLine1,1,70)" />
 										</AdrLine>
 										</xsl:if>
 										</xsl:otherwise>
 										</xsl:choose>
+										</xsl:if>
                                         
                                     
                                 </xsl:if>
@@ -870,7 +879,7 @@
                                             </xsl:if>
                                         </xsl:if>
                                     </Id>
-                                    <xsl:if test="(($TMPT='US ACH CCD')  or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='JP PAYACH'))">
+                                    <xsl:if test="(($TMPT='US ACH CCD')  or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC'))">
                                         <Tp>
                                             <Cd>
                                                 <xsl:choose>
@@ -884,6 +893,23 @@
                                             </Cd>
                                         </Tp>
                                     </xsl:if>
+									 <xsl:if test="(($TMPT='JP PAYACH'))">
+                                        <Tp>
+                                            <Cd>
+                                                <xsl:choose>
+                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='CHECKING') or (PayeeBankAccount/BankAccountType/Code='') or (PayeeBankAccount/BankAccountType/Code='UNKNOWN')">
+                                                        <xsl:text>CACC</xsl:text>
+                                                    </xsl:when>
+                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='SAVINGS')">
+                                                        <xsl:text>SVGS</xsl:text>
+                                                    </xsl:when>
+                                                </xsl:choose>
+                                            </Cd>
+                                        </Tp>
+                                    </xsl:if>
+									
+									
+									
                                     <xsl:if test="(($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)'))">
                                         <Ccy>
                                             <xsl:value-of select="PayeeBankAccount/BankAccountCurrency/Code" />
@@ -927,6 +953,8 @@
 								<xsl:variable name="BankCountry">
 									<xsl:value-of select="BankAccount/BankAddress/Country" />
 								</xsl:variable>
+								
+								 <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)')  or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='US ACH CCD'))">
 								
                                 <RmtInf>
                                     <xsl:for-each select="DocumentPayable">
@@ -1011,6 +1039,7 @@
                                         </xsl:if>
                                     </xsl:for-each>
                                 </RmtInf>
+								</xsl:if>
                             </CdtTrfTxInf>
                        
                     </PmtInf>
