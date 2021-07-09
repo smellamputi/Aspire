@@ -1,28 +1,4 @@
-/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-       CIF_COMMON_PACKAGE PACKAGE BODY
-       $Version 1.0
-   REM ============================================================================
-   REM
-   REM NAME...: CIF_COMMON_PACKAGE
-
-   REM
-   REM DESC...: Custom Package Body for CIF Deployment
-   REM
-   REM
-   REM FILES..: none
-   REM
-   REM HISTORY:
-   REM
-   REM WHO                  WHAT                                             WHEN
-   REM --------------       -------------------------------------------     ----------
-   REM KPMG Tech Team        CIF                                            10/17/2019
-   REM
-   REM ===============================================================================
-   REM
-   REM ===================================================================================
-
-   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-CREATE OR REPLACE PACKAGE BODY cif_common_package AS 
+create or replace PACKAGE BODY                   cif_common_package AS 
 --g_instance_id Varchar2(20000);
 
 /********************************************************************
@@ -56,8 +32,8 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
         p_instance_id         IN   NUMBER,
         p_interface_name      IN   VARCHAR2,
         p_interface_id        IN   VARCHAR2,
-        p_sequence_number     IN   NUMBER,
         p_run_date            IN   DATE,
+        p_message_severity   IN VARCHAR2,
         p_scope_name          IN   VARCHAR2,
         p_status              IN   VARCHAR2,
         p_error_code          IN   VARCHAR2,
@@ -178,6 +154,7 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
             interface_id,
             sequence_number,
             run_date,
+            message_severity,
             scope_name,
             status,
             error_code,
@@ -224,6 +201,7 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
             p_interface_id,
             nvl(l_sequence_number, 0) + 1,
             p_run_date,
+            p_message_severity,
             p_scope_name,
             p_status,
             p_error_code,
@@ -297,6 +275,7 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
                 interface_id,
                 sequence_number,
                 run_date,
+                message_severity,
                 status,
                 error_code,
                 error_message,
@@ -307,7 +286,8 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
                 p_interface_id,
                 nvl(l_sequence_number, 0) + 1,
                 p_run_date,
-                'Error',
+                p_message_severity,
+                'E',
                 sys.standard.sqlcode,
                 sys.standard.sqlerrm,
                 'Error while inserting record into CIF_LOG_MESSAGES_TBL - '
@@ -750,10 +730,12 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
 --//Doubt//
 
     PROCEDURE insert_process_instance (
-        p_aic_instance_id       IN    NUMBER,
+        p_oic_instance_id       IN    NUMBER,
+        p_interface_id          IN VARCHAR2,
         p_integration_name      IN    VARCHAR2,
         p_integration_pattern   IN    VARCHAR2,
         p_run_date              IN    DATE,
+        p_scope_name            IN    VARCHAR2,
         p_start_time            IN    DATE,
         p_end_time              IN    DATE,
         p_status_time           IN    DATE,
@@ -780,6 +762,7 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
       FROM   CIF_LOG_MESSAGES_TBL 
       WHERE  instance_id = p_instance_id; */ --Commented as a part of CIF_Common_Package Enhancement to improve performance
         l_sequence_number NUMBER; 
+        l_insert_count NUMBER;
    -- l_instance_id     NUMBER; --Commented as a part of CIF_Common_Package Enhancement to improve performance
     BEGIN 
    /*   SELECT CIF_AIC_INSTANCE_SEQ.NEXTVAL 
@@ -794,7 +777,7 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
             FROM
                 cif_log_messages_tbl
             WHERE
-                instance_id = p_aic_instance_id;
+                instance_id = p_oic_instance_id;
 
         EXCEPTION
             WHEN OTHERS THEN
@@ -815,20 +798,27 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
                 'INFO',
                 'Start Integration Run - ' || p_integration_name
             );*/
+
             INSERT INTO cif_log_messages_tbl (
-                instance_id,
+                 instance_id,
+                 interface_id,
+                 interface_name,
                 sequence_number,
                 run_date,
-                status
+                message_severity,
+                scope_name,
+                attribute1  -- process description
             ) VALUES (
-                p_instance_id,
+                p_oic_instance_id,
+                p_interface_id,
+                p_integration_name,
                 nvl(l_sequence_number, 0) + 1,
                 p_run_date,
-                'INFO'
-                || '-'
-                || 'Start Integration Run - '
-                || p_integration_name
+                'INFO',
+                p_scope_name,
+                p_integration_name || ' process logged for - '|| p_scope_name
             );
+            COMMIT ;
 
         EXCEPTION
             WHEN OTHERS THEN
@@ -839,7 +829,20 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
       --FETCH get_sequence_number INTO l_sequence_number; 
       --CLOSE get_sequence_number; 
       --p_instance_id := l_sequence_number ; 
+        BEGIN
+        SELECT
+                COUNT(1)
+            INTO l_insert_count
+            FROM
+                cif_process_instance_tbl
+            WHERE
+                instance_id = p_oic_instance_id
+                AND integration_name = p_integration_name
+                AND integration_pattern = p_integration_pattern ;
+        END;
+         IF (l_insert_count = 0) THEN
 
+        BEGIN
         INSERT INTO cif_process_instance_tbl (
             instance_id,
             integration_name,
@@ -866,7 +869,7 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
             attribute15,
             aic_instance_id
         ) VALUES ( --l_instance_id, 
-            p_aic_instance_id,
+            p_oic_instance_id,
             p_integration_name,
             p_integration_pattern,
             p_run_date,
@@ -889,8 +892,13 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
             p_attribute13,
             p_attribute14,
             p_attribute15,
-            p_aic_instance_id
+            p_oic_instance_id
         );
+        COMMIT;
+        END ;
+        ELSE
+        NULL;
+        END IF;
 
     EXCEPTION
         WHEN OTHERS THEN
@@ -915,15 +923,17 @@ CREATE OR REPLACE PACKAGE BODY cif_common_package AS
                 instance_id,
                 sequence_number,
                 run_date,
+                message_severity,
                 status,
                 error_code,
                 error_message,
                 error_details
             ) VALUES (
-                p_instance_id,
+                p_oic_instance_id,
                 nvl(l_sequence_number, 0) + 1,
                 p_run_date,
-                'Error',
+                'ERROR',
+                'E',
                 sys.standard.sqlcode,
                 sys.standard.sqlerrm,
                 'Error while inserting record into CIF_PROCESS_INSTANCE_TBL - '
