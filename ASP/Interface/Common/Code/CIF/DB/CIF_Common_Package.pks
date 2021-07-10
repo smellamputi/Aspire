@@ -1,28 +1,4 @@
-/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-       CIF_COMMON_PACKAGE PACKAGE SPECIFICATION
-       $Version 1.0
-   REM ============================================================================
-   REM
-   REM NAME...: CIF_COMMON_PACKAGE
-
-   REM
-   REM DESC...: Custom Package Spec for CIF Deployment
-   REM
-   REM
-   REM FILES..: none
-   REM
-   REM HISTORY:
-   REM
-   REM WHO                  WHAT                                                 WHEN
-   REM --------------       ----------------------------------------------       ----------
-   REM KPMG Tech Team        CIF                                              10/17/2019
-   REM
-   REM ===============================================================================
-   REM
-   REM ===================================================================================
-
-   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-CREATE OR REPLACE PACKAGE cif_common_package AS
+create or replace PACKAGE                   cif_common_package AS
     g_instance_id NUMBER := NULL;
 
  /*  procedure delete_stg_table(p_instance_id number); */
@@ -50,8 +26,8 @@ CREATE OR REPLACE PACKAGE cif_common_package AS
         p_instance_id         IN   NUMBER,
         p_interface_name      IN   VARCHAR2,
         p_interface_id        IN   VARCHAR2,
-        p_sequence_number     IN   NUMBER,
         p_run_date            IN   DATE,
+        p_message_severity    IN   VARCHAR2,
         p_scope_name          IN   VARCHAR2,
         p_status              IN   VARCHAR2,
         p_error_code          IN   VARCHAR2,
@@ -200,10 +176,12 @@ CREATE OR REPLACE PACKAGE cif_common_package AS
     );
 
     PROCEDURE insert_process_instance (
-        p_aic_instance_id       IN    NUMBER,
+        p_oic_instance_id           IN    NUMBER,
+        p_interface_id          IN VARCHAR2,
         p_integration_name      IN    VARCHAR2,
         p_integration_pattern   IN    VARCHAR2,
         p_run_date              IN    DATE,
+        p_scope_name            IN VARCHAR2,
         p_start_time            IN    DATE,
         p_end_time              IN    DATE,
         p_status_time           IN    DATE,
@@ -233,4 +211,4 @@ CREATE OR REPLACE PACKAGE cif_common_package AS
         p_column          VARCHAR2
     ) RETURN VARCHAR2;
 
-END cif_common_package;
+END CIF_COMMON_PACKAGE;
