@@ -5,7 +5,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output omit-xml-declaration="no" />
     <xsl:output method="xml" />
-    
     <xsl:param name="daysDiff" select="'1'"/>
     <xsl:template name="JDN">
         <xsl:param name="date"/>
@@ -38,8 +37,7 @@
             <xsl:variable name="pymtd" />
             <xsl:variable name="TMPT" />
             <xsl:variable name="JDN" />
-			<xsl:variable name="BankCountry" />
-			
+            <xsl:variable name="BankCountry" />
             <CstmrCdtTrfInitn>
                 <GrpHdr>
                     <MsgId>
@@ -59,23 +57,21 @@
                         <xsl:value-of select="InstructionTotals/PaymentCount" />
                     </NbOfTxs>
                     <CtrlSum>
-					 <xsl:value-of select="format-number(sum(/OutboundPaymentInstruction/OutboundPayment[BankAccount/BankAddress/Country!='AU']/PaymentAmount/Value) + sum(/OutboundPaymentInstruction/OutboundPayment[BankAccount/BankAddress/Country='AU']/DocumentPayable/TotalDocumentAmount/Value) , '##0.00')"/>
-					</CtrlSum>
-					 
+                        <xsl:value-of select="format-number(sum(/OutboundPaymentInstruction/OutboundPayment[BankAccount/BankAddress/Country!='AU']/PaymentAmount/Value) + sum(/OutboundPaymentInstruction/OutboundPayment[BankAccount/BankAddress/Country='AU']/DocumentPayable/TotalDocumentAmount/Value) , '##0.00')"/>
+                    </CtrlSum>
                     <InitgPty>
                         <Nm>
-						 <xsl:choose>
+                            <xsl:choose>
                                 <xsl:when test="InstructionGrouping/Payer/Address/Country='JP'">
                                     <xsl:value-of select="substring(upper-case(InstructionGrouping/Payer/LegalEntityName),1,140)" />
                                 </xsl:when>
-								 <xsl:when test="InstructionGrouping/Payer/LegalEntityName='DocuSign International, Inc. (Australia Branch)'">
+                                <xsl:when test="InstructionGrouping/Payer/LegalEntityName='DocuSign International, Inc. (Australia Branch)'">
                                     <xsl:text>DocuSign International, Inc.</xsl:text>
                                 </xsl:when>
-								<xsl:otherwise>
+                                <xsl:otherwise>
                                     <xsl:value-of select="substring(InstructionGrouping/Payer/LegalEntityName,1,140)" />
                                 </xsl:otherwise>
                             </xsl:choose>
-                            
                         </Nm>
                         <xsl:if test="InstructionGrouping/Payer/Address/Country='SG'">
                             <PstlAdr>
@@ -84,12 +80,9 @@
                                         <xsl:value-of select="substring(InstructionGrouping/Payer/Address/AddressLine2,1,70)" />
                                     </StrtNm>
                                 </xsl:if>
-								
                                 <xsl:if test="not(InstructionGrouping/Payer/Address/PostalCode='')">
                                     <PstCd>
-                                        
-                                <xsl:value-of select= "translate(InstructionGrouping/Payer/Address/PostalCode,'-','')" />
-                                           
+                                        <xsl:value-of select= "translate(InstructionGrouping/Payer/Address/PostalCode,'-','')" />
                                     </PstCd>
                                 </xsl:if>
                                 <xsl:if test="not(InstructionGrouping/Payer/Address/City='')">
@@ -212,8 +205,6 @@
                                 </xsl:when>
                             </xsl:choose>
                         </xsl:variable>
-						
-						
                         <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
                             <PmtInfId>
                                 <xsl:choose>
@@ -308,27 +299,19 @@
                         <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX')or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
                             <!-- get from new logical table instead -->
                             <NbOfTxs>
-                                
-                                        <xsl:value-of select="'1'" />
-                                   
+                                <xsl:value-of select="'1'" />
                             </NbOfTxs>
                         </xsl:if>
                         <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX')or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
                             <!-- get from new logical table instead -->
                             <CtrlSum>
-                                
-                                        <xsl:value-of select="format-number(PaymentAmount/Value, '##0.00')"/>
-                                    
-                               
+                                <xsl:value-of select="format-number(PaymentAmount/Value, '##0.00')"/>
                             </CtrlSum>
                         </xsl:if>
                         <xsl:if test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
                             <!-- get from new logical table instead -->
                             <CtrlSum>
-                                
-                              
-                                        <xsl:value-of select="format-number(DocumentPayable/TotalDocumentAmount/Value, '##0.00')"/>
-                                   
+                                <xsl:value-of select="format-number(DocumentPayable/TotalDocumentAmount/Value, '##0.00')"/>
                             </CtrlSum>
                         </xsl:if>
                         <PmtTpInf>
@@ -388,13 +371,12 @@
                             <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
                                 <Nm>
                                     <xsl:choose>
-                                        
-										<xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                        <xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
                                             <xsl:value-of select="substring(upper-case(Payer/Name),1,140)" />
                                         </xsl:when>
-										<xsl:when test="Payer/Name='DocuSign International, Inc. (Australia Branch)'">
-                                        <xsl:text>DocuSign International, Inc.</xsl:text>
-                                      </xsl:when>
+                                        <xsl:when test="Payer/Name='DocuSign International, Inc. (Australia Branch)'">
+                                            <xsl:text>DocuSign International, Inc.</xsl:text>
+                                        </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="substring(Payer/Name,1,140)" />
                                         </xsl:otherwise>
@@ -409,32 +391,31 @@
                                         </StrtNm>
                                     </xsl:if>
                                 </xsl:if>
-								 <xsl:if test="(($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') )">
+                                <xsl:if test="(($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') )">
                                     <xsl:if test="not(Payer/Address/AddressLine2='')">
                                         <StrtNm>
                                             <xsl:value-of select="substring(Payer/Address/AddressLine2,1,70)" />
                                         </StrtNm>
                                     </xsl:if>
                                 </xsl:if>
-								<xsl:if test="not(Payer/Address/AddressLine1='')">
-								<xsl:if test="(($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
-								<BldgNb>
-								         <xsl:value-of select="substring(translate(Payer/Address/AddressLine1,'#',''),1,70)" />
-								</BldgNb>
-								 </xsl:if>
+                                <xsl:if test="not(Payer/Address/AddressLine1='')">
+                                    <xsl:if test="(($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
+                                        <BldgNb>
+                                            <xsl:value-of select="substring(translate(Payer/Address/AddressLine1,'#',''),1,70)" />
+                                        </BldgNb>
+                                    </xsl:if>
                                 </xsl:if>
                                 <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS')  or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
                                     <xsl:if test="not(Payer/Address/PostalCode='')">
                                         <PstCd>
-										
-										<xsl:choose>
-										<xsl:when test="(($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-										<xsl:value-of select= "Payer/Address/PostalCode" />
-                                        </xsl:when> 
-										<xsl:otherwise>
-										     <xsl:value-of select= "translate(Payer/Address/PostalCode,'-','')" />
-										</xsl:otherwise>
-										</xsl:choose>
+                                            <xsl:choose>
+                                                <xsl:when test="(($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                                    <xsl:value-of select= "Payer/Address/PostalCode" />
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select= "translate(Payer/Address/PostalCode,'-','')" />
+                                                </xsl:otherwise>
+                                            </xsl:choose>
                                         </PstCd>
                                     </xsl:if>
                                 </xsl:if>
@@ -460,29 +441,22 @@
                                     </xsl:if>
                                 </xsl:if>
                                 <xsl:if test="(($TMPT='IE / FR / DE SEPA') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
-                                    
-                                        <xsl:if test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-										<xsl:choose>
-										
-										
-										<xsl:when test="not(Payer/Address/AddressLine2='')">
-										
-										<AdrLine>
-                                            <xsl:value-of select="substring(concat(Payer/Address/AddressLine2,',',Payer/Address/AddressLine3),1,70)" />
-										</AdrLine>
-										
-										</xsl:when>
-										<xsl:otherwise>
-										<xsl:if test="not(Payer/Address/AddressLine1='')">
-										<AdrLine>
-										<xsl:value-of select="substring(Payer/Address/AddressLine1,1,70)" />
-										</AdrLine>
-										</xsl:if>
-										</xsl:otherwise>
-										</xsl:choose>
-										</xsl:if>
-                                        
-                                    
+                                    <xsl:if test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                        <xsl:choose>
+                                            <xsl:when test="not(Payer/Address/AddressLine2='')">
+                                                <AdrLine>
+                                                    <xsl:value-of select="substring(concat(Payer/Address/AddressLine2,',',Payer/Address/AddressLine3),1,70)" />
+                                                </AdrLine>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:if test="not(Payer/Address/AddressLine1='')">
+                                                    <AdrLine>
+                                                        <xsl:value-of select="substring(Payer/Address/AddressLine1,1,70)" />
+                                                    </AdrLine>
+                                                </xsl:if>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
                                 </xsl:if>
                             </PstlAdr>
                             <xsl:if test="($TMPT='US ACH CCD')">
@@ -525,14 +499,14 @@
                                         <xsl:if test="not(BankAccount/BankAccountNumber='')">
                                             <Othr>
                                                 <Id>
-												<xsl:choose>
-												<xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-                                                    <xsl:value-of select="substring(BankAccount/BankAccountNumber,5)" />
-												</xsl:when>
-												<xsl:otherwise>
-													<xsl:value-of select="BankAccount/BankAccountNumber" />
-												</xsl:otherwise>
-												</xsl:choose>
+                                                    <xsl:choose>
+                                                        <xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                                            <xsl:value-of select="substring(BankAccount/BankAccountNumber,5)" />
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="BankAccount/BankAccountNumber" />
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
                                                 </Id>
                                             </Othr>
                                         </xsl:if>
@@ -583,21 +557,15 @@
                                         </xsl:if>
                                     </ClrSysMmbId>
                                 </xsl:if>
-								<xsl:if test="($TMPT='IE / FR / DE / GB Wire Cross Border/FX')">
-								<xsl:if test="not(BankAccount/BranchNumber='')">
-                                    <ClrSysMmbId>
-                                       
-                                       
-                                            
-                                                <MmbId>
-                                                    <xsl:value-of select="BankAccount/BranchNumber" />
-                                                </MmbId>
-                                            
-                                       
-                                    </ClrSysMmbId>
-									</xsl:if>
-								 </xsl:if>
-                             
+                                <xsl:if test="($TMPT='IE / FR / DE / GB Wire Cross Border/FX')">
+                                    <xsl:if test="not(BankAccount/BranchNumber='')">
+                                        <ClrSysMmbId>
+                                            <MmbId>
+                                                <xsl:value-of select="BankAccount/BranchNumber" />
+                                            </MmbId>
+                                        </ClrSysMmbId>
+                                    </xsl:if>
+                                </xsl:if>
                                 <xsl:if test="(($TMPT='GB CHAPS') or ($TMPT='GB BACS'))">
                                     <xsl:if test="not(BankAccount/BankName='')">
                                         <Nm>
@@ -648,319 +616,304 @@
                             </ChrgBr>
                         </xsl:if>
                         <xsl:variable name="paymentdetails" select="PaymentDetails" />
-                    
-                           
-                            <CdtTrfTxInf>
-                                <PmtId>
-                                    <xsl:if test="(($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
-                                        <InstrId>
-                                            <xsl:value-of select="PaymentNumber/PaymentReferenceNumber" />
-                                        </InstrId>
+                        <CdtTrfTxInf>
+                            <PmtId>
+                                <xsl:if test="(($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
+                                    <InstrId>
+                                        <xsl:value-of select="PaymentNumber/PaymentReferenceNumber" />
+                                    </InstrId>
+                                </xsl:if>
+                                <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
+                                    <EndToEndId>
+                                        <xsl:value-of select="PaymentNumber/PaymentReferenceNumber" />
+                                    </EndToEndId>
+                                </xsl:if>
+                            </PmtId>
+                            <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
+                                <Amt>
+                                    <InstdAmt>
+                                        <xsl:attribute name="Ccy">
+                                            <xsl:value-of select="PaymentAmount/Currency/Code" />
+                                        </xsl:attribute>
+                                        <xsl:value-of select="format-number(PaymentAmount/Value, '##0.00')" />
+                                    </InstdAmt>
+                                </Amt>
+                            </xsl:if>
+                            <xsl:if test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
+                                <Amt>
+                                    <InstdAmt>
+                                        <xsl:attribute name="Ccy">
+                                            <xsl:value-of select="DocumentPayable/TotalDocumentAmount/Currency/Code" />
+                                        </xsl:attribute>
+                                        <xsl:value-of select="format-number(DocumentPayable/TotalDocumentAmount/Value, '##0.00')" />
+                                    </InstdAmt>
+                                </Amt>
+                            </xsl:if>
+                            <xsl:if test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                <ChrgBr>
+                                    <xsl:choose>
+                                        <xsl:when test="not(BankCharges/BankChargeBearer/Code='')">
+                                            <xsl:value-of select="BankCharges/BankChargeBearer/Code" />
+                                        </xsl:when>
+                                        <xsl:otherwise>SHAR</xsl:otherwise>
+                                    </xsl:choose>
+                                </ChrgBr>
+                            </xsl:if>
+                            <CdtrAgt>
+                                <FinInstnId>
+                                    <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='US Wire Cross Border / US Wire FX'))">
+                                        <xsl:if test="not(PayeeBankAccount/SwiftCode='')">
+                                            <BIC>
+                                                <xsl:value-of select="PayeeBankAccount/SwiftCode" />
+                                            </BIC>
+                                        </xsl:if>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='US ACH CCD')or ($TMPT='US WIRE DOMESTIC')  or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)'))">
+                                        <ClrSysMmbId>
+                                            <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)')) ">
+                                                <ClrSysId>
+                                                    <Cd>
+                                                        <xsl:choose>
+                                                            <xsl:when test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC'))">
+                                                                <xsl:text>USABA</xsl:text>
+                                                            </xsl:when>
+                                                            <xsl:when test="(($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)'))">
+                                                                <xsl:text>CACPA</xsl:text>
+                                                            </xsl:when>
+                                                            <xsl:when test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic'))">
+                                                                <xsl:text>AUBSB</xsl:text>
+                                                            </xsl:when>
+                                                        </xsl:choose>
+                                                    </Cd>
+                                                </ClrSysId>
+                                            </xsl:if>
+                                            <xsl:if test="(($TMPT='US ACH CCD')or ($TMPT='US WIRE DOMESTIC') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)'))">
+                                                <xsl:if test="not(PayeeBankAccount/BranchNumber='')">
+                                                    <MmbId>
+                                                        <xsl:value-of select="PayeeBankAccount/BranchNumber" />
+                                                    </MmbId>
+                                                </xsl:if>
+                                            </xsl:if>
+                                        </ClrSysMmbId>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
+                                        <Nm>
+                                            <xsl:value-of select="substring(PayeeBankAccount/BankName,1,140)" />
+                                        </Nm>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='IE / FR / DE Wire Domestic'))">
+                                        <PstlAdr>
+                                            <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX'))">
+                                                <xsl:if test="not(PayeeBankAccount/BankAddress/PostalCode='')">
+                                                    <PstCd>
+                                                        <xsl:value-of select= "translate(PayeeBankAccount/BankAddress/PostalCode,'-','')" />
+                                                    </PstCd>
+                                                </xsl:if>
+                                            </xsl:if>
+                                            <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
+                                                <xsl:if test="not(PayeeBankAccount/BankAddress/City='')">
+                                                    <TwnNm>
+                                                        <xsl:value-of select="PayeeBankAccount/BankAddress/City" />
+                                                    </TwnNm>
+                                                </xsl:if>
+                                            </xsl:if>
+                                            <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX'))">
+                                                <xsl:if test="not(PayeeBankAccount/BankAddress/State='')">
+                                                    <CtrySubDvsn>
+                                                        <xsl:value-of select="PayeeBankAccount/BankAddress/State" />
+                                                    </CtrySubDvsn>
+                                                </xsl:if>
+                                            </xsl:if>
+                                            <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='IE / FR / DE Wire Domestic'))">
+                                                <xsl:if test="not(PayeeBankAccount/BankAddress/Country='')">
+                                                    <Ctry>
+                                                        <xsl:value-of select="PayeeBankAccount/BankAddress/Country" />
+                                                    </Ctry>
+                                                </xsl:if>
+                                            </xsl:if>
+                                            <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
+                                                <xsl:if test="not(PayeeBankAccount/BankAddress/AddressLine1='')">
+                                                    <AdrLine>
+                                                        <xsl:value-of select="substring(concat(PayeeBankAccount/BankAddress/AddressLine1,' ',PayeeBankAccount/BankAddress/AddressLine2),1,70)" />
+                                                    </AdrLine>
+                                                </xsl:if>
+                                            </xsl:if>
+                                        </PstlAdr>
+                                    </xsl:if>
+                                </FinInstnId>
+                            </CdtrAgt>
+                            <Cdtr>
+                                <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
+                                    <Nm>
+                                        <xsl:value-of select="substring(SupplierorParty/Name,1,140)" />
+                                    </Nm>
+                                </xsl:if>
+                                <PstlAdr>
+                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS'))">
+                                        <xsl:if test="not(SupplierorParty/Address/AddressLine1='')">
+                                            <StrtNm>
+                                                <xsl:value-of select="substring(SupplierorParty/Address/AddressLine1,1,70)" />
+                                            </StrtNm>
+                                        </xsl:if>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC')  or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
+                                        <xsl:if test="not(SupplierorParty/Address/PostalCode='')">
+                                            <PstCd>
+                                                <xsl:value-of select= "translate(SupplierorParty/Address/PostalCode,'-','')" />
+                                            </PstCd>
+                                        </xsl:if>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
+                                        <xsl:if test="not(SupplierorParty/Address/City='')">
+                                            <TwnNm>
+                                                <xsl:value-of select="SupplierorParty/Address/City" />
+                                            </TwnNm>
+                                        </xsl:if>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX')or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)'))">
+                                        <xsl:if test="not(SupplierorParty/Address/State='')">
+                                            <CtrySubDvsn>
+                                                <xsl:value-of select="SupplierorParty/Address/State" />
+                                            </CtrySubDvsn>
+                                        </xsl:if>
                                     </xsl:if>
                                     <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
-                                        <EndToEndId>
-                                            <xsl:value-of select="PaymentNumber/PaymentReferenceNumber" />
-                                        </EndToEndId>
+                                        <xsl:if test="not(SupplierorParty/Address/Country='')">
+                                            <Ctry>
+                                                <xsl:value-of select="SupplierorParty/Address/Country" />
+                                            </Ctry>
+                                        </xsl:if>
                                     </xsl:if>
-                                </PmtId>
-                               
-                                <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
-                                    <Amt>
-                                        <InstdAmt>
-                                            <xsl:attribute name="Ccy">
-                                                <xsl:value-of select="PaymentAmount/Currency/Code" />
-                                            </xsl:attribute>
-                                            <xsl:value-of select="format-number(PaymentAmount/Value, '##0.00')" />
-                                        </InstdAmt>
-                                    </Amt>
-                                </xsl:if>
-                                <xsl:if test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
-                                    <Amt>
-                                        <InstdAmt>
-                                            <xsl:attribute name="Ccy">
-                                                <xsl:value-of select="DocumentPayable/TotalDocumentAmount/Currency/Code" />
-                                            </xsl:attribute>
-                                            <xsl:value-of select="format-number(DocumentPayable/TotalDocumentAmount/Value, '##0.00')" />
-                                        </InstdAmt>
-                                    </Amt>
-                                </xsl:if>
-                                <xsl:if test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-                                    <ChrgBr>
-                                        <xsl:choose>
-                                            <xsl:when test="not(BankCharges/BankChargeBearer/Code='')">
-                                                <xsl:value-of select="BankCharges/BankChargeBearer/Code" />
-                                            </xsl:when>
-                                            <xsl:otherwise>SHAR</xsl:otherwise>
-                                        </xsl:choose>
-                                    </ChrgBr>
-                                </xsl:if>
-                                <CdtrAgt>
-                                    <FinInstnId>
-                                        <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='US Wire Cross Border / US Wire FX'))">
-                                            <xsl:if test="not(PayeeBankAccount/SwiftCode='')">
-                                                <BIC>
-                                                    <xsl:value-of select="PayeeBankAccount/SwiftCode" />
-                                                </BIC>
-                                            </xsl:if>
+                                    <xsl:if test="(($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
+                                        <xsl:if test="not(SupplierorParty/Address/AddressLine1='')">
+                                            <AdrLine>
+                                                <xsl:value-of select="substring(concat(SupplierorParty/Address/AddressLine1,' ',SupplierorParty/Address/AddressLine2),1,70)" />
+                                            </AdrLine>
                                         </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD')or ($TMPT='US WIRE DOMESTIC')  or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)'))">
-                                            <ClrSysMmbId>
-                                                <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)')) ">
-                                                    <ClrSysId>
-                                                        <Cd>
-                                                            <xsl:choose>
-                                                                <xsl:when test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC'))">
-                                                                    <xsl:text>USABA</xsl:text>
-                                                                </xsl:when>
-                                                                <xsl:when test="(($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)'))">
-                                                                    <xsl:text>CACPA</xsl:text>
-                                                                </xsl:when>
-                                                                <xsl:when test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic'))">
-                                                                    <xsl:text>AUBSB</xsl:text>
-                                                                </xsl:when>
-                                                            </xsl:choose>
-                                                        </Cd>
-                                                    </ClrSysId>
-                                                </xsl:if>
-                                                <xsl:if test="(($TMPT='US ACH CCD')or ($TMPT='US WIRE DOMESTIC') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)'))">
-                                                    <xsl:if test="not(PayeeBankAccount/BranchNumber='')">
-                                                        <MmbId>
-                                                            <xsl:value-of select="PayeeBankAccount/BranchNumber" />
-                                                        </MmbId>
-                                                    </xsl:if>
-                                                </xsl:if>
-                                            </ClrSysMmbId>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
-                                            <Nm>
-                                                <xsl:value-of select="substring(PayeeBankAccount/BankName,1,140)" />
-                                            </Nm>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='IE / FR / DE Wire Domestic'))">
-                                            <PstlAdr>
-                                                <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX'))">
-                                                    <xsl:if test="not(PayeeBankAccount/BankAddress/PostalCode='')">
-                                                        <PstCd>
-														<xsl:value-of select= "translate(PayeeBankAccount/BankAddress/PostalCode,'-','')" />
-                                                            
-                                                        </PstCd>
-                                                    </xsl:if>
-                                                </xsl:if>
-                                                <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
-                                                    <xsl:if test="not(PayeeBankAccount/BankAddress/City='')">
-                                                        <TwnNm>
-                                                            <xsl:value-of select="PayeeBankAccount/BankAddress/City" />
-                                                        </TwnNm>
-                                                    </xsl:if>
-                                                </xsl:if>
-                                                <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX'))">
-                                                    <xsl:if test="not(PayeeBankAccount/BankAddress/State='')">
-                                                        <CtrySubDvsn>
-                                                            <xsl:value-of select="PayeeBankAccount/BankAddress/State" />
-                                                        </CtrySubDvsn>
-                                                    </xsl:if>
-                                                </xsl:if>
-                                                <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='IE / FR / DE Wire Domestic'))">
-                                                    <xsl:if test="not(PayeeBankAccount/BankAddress/Country='')">
-                                                        <Ctry>
-                                                            <xsl:value-of select="PayeeBankAccount/BankAddress/Country" />
-                                                        </Ctry>
-                                                    </xsl:if>
-                                                </xsl:if>
-                                                <xsl:if test="(($TMPT='US WIRE DOMESTIC') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
-                                                    <xsl:if test="not(PayeeBankAccount/BankAddress/AddressLine1='')">
-                                                        <AdrLine>
-                                                            <xsl:value-of select="substring(concat(PayeeBankAccount/BankAddress/AddressLine1,' ',PayeeBankAccount/BankAddress/AddressLine2),1,70)" />
-                                                        </AdrLine>
-                                                    </xsl:if>
-                                                </xsl:if>
-                                            </PstlAdr>
-                                        </xsl:if>
-                                    </FinInstnId>
-                                </CdtrAgt>
-                                <Cdtr>
-                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
-                                        
-                                            <Nm>
-                                                <xsl:value-of select="substring(SupplierorParty/Name,1,140)" />
-                                            </Nm>
-                                        </xsl:if>
-                                    
-                                    <PstlAdr>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS'))">
-                                            <xsl:if test="not(SupplierorParty/Address/AddressLine1='')">
-                                                <StrtNm>
-                                                    <xsl:value-of select="substring(SupplierorParty/Address/AddressLine1,1,70)" />
-                                                </StrtNm>
-                                            </xsl:if>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC')  or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
-                                            <xsl:if test="not(SupplierorParty/Address/PostalCode='')">
-                                                <PstCd>
-												<xsl:value-of select= "translate(SupplierorParty/Address/PostalCode,'-','')" />
-                                                    
-                                                </PstCd>
-                                            </xsl:if>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE'))">
-                                            <xsl:if test="not(SupplierorParty/Address/City='')">
-                                                <TwnNm>
-                                                    <xsl:value-of select="SupplierorParty/Address/City" />
-                                                </TwnNm>
-                                            </xsl:if>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX')or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)'))">
-                                            <xsl:if test="not(SupplierorParty/Address/State='')">
-                                                <CtrySubDvsn>
-                                                    <xsl:value-of select="SupplierorParty/Address/State" />
-                                                </CtrySubDvsn>
-                                            </xsl:if>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
-                                            <xsl:if test="not(SupplierorParty/Address/Country='')">
-                                                <Ctry>
-                                                    <xsl:value-of select="SupplierorParty/Address/Country" />
-                                                </Ctry>
-                                            </xsl:if>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
-                                            <xsl:if test="not(SupplierorParty/Address/AddressLine1='')">
-                                                <AdrLine>
-                                                    <xsl:value-of select="substring(concat(SupplierorParty/Address/AddressLine1,' ',SupplierorParty/Address/AddressLine2),1,70)" />
-                                                </AdrLine>
-                                            </xsl:if>
-                                        </xsl:if>
-                                    </PstlAdr>
-									<xsl:if test="($TMPT='JP PAYACH')">
-									<Id>
-									<OrgId>
-									<Othr>
-									<Id>
-										<xsl:value-of select="SupplierorParty/SupplierNumber" />
-									</Id>
-									</Othr>
-									</OrgId>
-									</Id>
-									</xsl:if>
-                                    <!--employee payments-->
-                                </Cdtr>
-                                <CdtrAcct>
+                                    </xsl:if>
+                                </PstlAdr>
+                                <xsl:if test="($TMPT='JP PAYACH')">
                                     <Id>
-                                        <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='IE / FR / DE SEPA'))">
-                                            <xsl:if test="not(PayeeBankAccount/IBANNumber='')">
+                                        <OrgId>
+                                            <Othr>
+                                                <Id>
+                                                    <xsl:value-of select="SupplierorParty/SupplierNumber" />
+                                                </Id>
+                                            </Othr>
+                                        </OrgId>
+                                    </Id>
+                                </xsl:if>
+                                <!--employee payments-->
+                            </Cdtr>
+                            <CdtrAcct>
+                                <Id>
+                                    <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='IE / FR / DE SEPA'))">
+                                        <xsl:if test="not(PayeeBankAccount/IBANNumber='')">
+                                            <IBAN>
+                                                <xsl:value-of select="translate(PayeeBankAccount/IBANNumber,' ','')" />
+                                            </IBAN>
+                                        </xsl:if>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX'))">
+                                        <xsl:choose>
+                                            <xsl:when test="not(PayeeBankAccount/IBANNumber='')">
                                                 <IBAN>
                                                     <xsl:value-of select="translate(PayeeBankAccount/IBANNumber,' ','')" />
                                                 </IBAN>
-                                            </xsl:if>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX'))">
-                                            <xsl:choose>
-                                                <xsl:when test="not(PayeeBankAccount/IBANNumber='')">
-                                                    <IBAN>
-                                                        <xsl:value-of select="translate(PayeeBankAccount/IBANNumber,' ','')" />
-                                                    </IBAN>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                    <Othr>
-                                                        <Id>
-                                                            <xsl:value-of select="PayeeBankAccount/BankAccountNumber" />
-                                                        </Id>
-                                                    </Othr>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
-                                        </xsl:if>
-                                        <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
-                                            <xsl:if test="not(PayeeBankAccount/BankAccountNumber='')">
+                                            </xsl:when>
+                                            <xsl:otherwise>
                                                 <Othr>
                                                     <Id>
                                                         <xsl:value-of select="PayeeBankAccount/BankAccountNumber" />
                                                     </Id>
                                                 </Othr>
-                                            </xsl:if>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                    <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or  ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
+                                        <xsl:if test="not(PayeeBankAccount/BankAccountNumber='')">
+                                            <Othr>
+                                                <Id>
+                                                    <xsl:value-of select="PayeeBankAccount/BankAccountNumber" />
+                                                </Id>
+                                            </Othr>
                                         </xsl:if>
-                                    </Id>
-                                    <xsl:if test="(($TMPT='US ACH CCD')  or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC'))">
-                                        <Tp>
-                                            <Cd>
-                                                <xsl:choose>
-                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='CHECKING') or (PayeeBankAccount/BankAccountType/Code='') or (PayeeBankAccount/BankAccountType/Code='UNKNOWN')">
-                                                        <xsl:text>CASH</xsl:text>
-                                                    </xsl:when>
-                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='SAVINGS')">
-                                                        <xsl:text>SVGS</xsl:text>
-                                                    </xsl:when>
-                                                </xsl:choose>
-                                            </Cd>
-                                        </Tp>
                                     </xsl:if>
-									 <xsl:if test="(($TMPT='JP PAYACH'))">
-                                        <Tp>
-                                            <Cd>
-                                                <xsl:choose>
-                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='CHECKING') or (PayeeBankAccount/BankAccountType/Code='') or (PayeeBankAccount/BankAccountType/Code='UNKNOWN')">
-                                                        <xsl:text>CACC</xsl:text>
-                                                    </xsl:when>
-                                                    <xsl:when test="(PayeeBankAccount/BankAccountType/Code='SAVINGS')">
-                                                        <xsl:text>SVGS</xsl:text>
-                                                    </xsl:when>
-                                                </xsl:choose>
-                                            </Cd>
-                                        </Tp>
-                                    </xsl:if>
-									
-									
-									
-                                    <xsl:if test="(($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)'))">
-                                        <Ccy>
-                                            <xsl:value-of select="PayeeBankAccount/BankAccountCurrency/Code" />
-                                        </Ccy>
-                                    </xsl:if>
-                                    <xsl:if test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
-                                        <Nm>
-                                            <xsl:value-of select="substring(PayeeBankAccount/BankName,1,140)" />
-                                        </Nm>
-                                    </xsl:if>
-                                </CdtrAcct>
-                                <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-                                    <InstrForCdtrAgt>
-                                        <InstrInf>
+                                </Id>
+                                <xsl:if test="(($TMPT='US ACH CCD')  or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC'))">
+                                    <Tp>
+                                        <Cd>
                                             <xsl:choose>
-                                                <xsl:when test="($TMPT='US ACH CCD')">
-                                                    <xsl:text>DocuSign</xsl:text>
+                                                <xsl:when test="(PayeeBankAccount/BankAccountType/Code='CHECKING') or (PayeeBankAccount/BankAccountType/Code='') or (PayeeBankAccount/BankAccountType/Code='UNKNOWN')">
+                                                    <xsl:text>CASH</xsl:text>
                                                 </xsl:when>
-                                                <xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-                                                    <xsl:text>/ACC/NNKNI</xsl:text>
+                                                <xsl:when test="(PayeeBankAccount/BankAccountType/Code='SAVINGS')">
+                                                    <xsl:text>SVGS</xsl:text>
                                                 </xsl:when>
                                             </xsl:choose>
-                                        </InstrInf>
-                                    </InstrForCdtrAgt>
+                                        </Cd>
+                                    </Tp>
                                 </xsl:if>
-                                <xsl:if test="(($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
-                                    <RgltryRptg>
-                                        <DbtCdtRptgInd>
-                                            <xsl:text>DEBT</xsl:text>
-                                        </DbtCdtRptgInd>
-                                        <Dtls>
-                                            <Tp>PaymentTypeCode</Tp>
-                                            <Inf>NTR</Inf>
-                                        </Dtls>
-                                        <Dtls>
-                                            <Tp>PurposeOfPayment</Tp>
-                                            <Inf>9999</Inf>
-                                        </Dtls>
-                                    </RgltryRptg>
+                                <xsl:if test="(($TMPT='JP PAYACH'))">
+                                    <Tp>
+                                        <Cd>
+                                            <xsl:choose>
+                                                <xsl:when test="(PayeeBankAccount/BankAccountType/Code='CHECKING') or (PayeeBankAccount/BankAccountType/Code='') or (PayeeBankAccount/BankAccountType/Code='UNKNOWN')">
+                                                    <xsl:text>CACC</xsl:text>
+                                                </xsl:when>
+                                                <xsl:when test="(PayeeBankAccount/BankAccountType/Code='SAVINGS')">
+                                                    <xsl:text>SVGS</xsl:text>
+                                                </xsl:when>
+                                            </xsl:choose>
+                                        </Cd>
+                                    </Tp>
                                 </xsl:if>
-								<xsl:variable name="BankCountry">
-									<xsl:value-of select="BankAccount/BankAddress/Country" />
-								</xsl:variable>
-								
-								 <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)')  or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='US ACH CCD'))">
-								
+                                <xsl:if test="(($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)'))">
+                                    <Ccy>
+                                        <xsl:value-of select="PayeeBankAccount/BankAccountCurrency/Code" />
+                                    </Ccy>
+                                </xsl:if>
+                                <xsl:if test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
+                                    <Nm>
+                                        <xsl:value-of select="substring(PayeeBankAccount/BankName,1,140)" />
+                                    </Nm>
+                                </xsl:if>
+                            </CdtrAcct>
+                            <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                <InstrForCdtrAgt>
+                                    <InstrInf>
+                                        <xsl:choose>
+                                            <xsl:when test="($TMPT='US ACH CCD')">
+                                                <xsl:text>DocuSign</xsl:text>
+                                            </xsl:when>
+                                            <xsl:when test="(($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                                <xsl:text>/ACC/NNKNI</xsl:text>
+                                            </xsl:when>
+                                        </xsl:choose>
+                                    </InstrInf>
+                                </InstrForCdtrAgt>
+                            </xsl:if>
+                            <xsl:if test="(($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX'))">
+                                <RgltryRptg>
+                                    <DbtCdtRptgInd>
+                                        <xsl:text>DEBT</xsl:text>
+                                    </DbtCdtRptgInd>
+                                    <Dtls>
+                                        <Tp>PaymentTypeCode</Tp>
+                                        <Inf>NTR</Inf>
+                                    </Dtls>
+                                    <Dtls>
+                                        <Tp>PurposeOfPayment</Tp>
+                                        <Inf>9999</Inf>
+                                    </Dtls>
+                                </RgltryRptg>
+                            </xsl:if>
+                            <xsl:variable name="BankCountry">
+                                <xsl:value-of select="BankAccount/BankAddress/Country" />
+                            </xsl:variable>
+                            <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)')  or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='US ACH CCD'))">
                                 <RmtInf>
                                     <xsl:for-each select="DocumentPayable">
-									
-									
-									
                                         <xsl:if test="(($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)')  or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
                                             <Ustrd>
                                                 <xsl:choose>
@@ -1039,9 +992,8 @@
                                         </xsl:if>
                                     </xsl:for-each>
                                 </RmtInf>
-								</xsl:if>
-                            </CdtTrfTxInf>
-                       
+                            </xsl:if>
+                        </CdtTrfTxInf>
                     </PmtInf>
                 </xsl:for-each>
             </CstmrCdtTrfInitn>
