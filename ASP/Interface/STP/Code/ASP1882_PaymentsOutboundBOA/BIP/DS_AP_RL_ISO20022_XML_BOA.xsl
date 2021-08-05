@@ -436,6 +436,15 @@
                                         </CtrySubDvsn>
                                     </xsl:if>
                                 </xsl:if>
+								<xsl:if test="((($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX')) and (Payer/Name='DocuSign, Inc.'))">
+                                    <xsl:if test="not(Payer/Address/State='')">
+                                        <CtrySubDvsn>
+                                            <xsl:value-of select="Payer/Address/State" />
+                                        </CtrySubDvsn>
+                                    </xsl:if>
+                                </xsl:if>
+								
+								
                                 <xsl:if test="(($TMPT='US ACH CCD') or ($TMPT='IE / FR / DE Wire Domestic') or ($TMPT='US Wire Cross Border / US Wire FX') or ($TMPT='US WIRE DOMESTIC') or ($TMPT='IE / FR / DE SEPA') or ($TMPT='IE / FR / DE / GB Wire Cross Border/FX') or ($TMPT='GB CHAPS') or ($TMPT='GB BACS') or ($TMPT='JP PAYACH') or ($TMPT='JP Wire Domestic/International') or ($TMPT='JP Wire CrossBorder FX') or ($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX') or ($TMPT='CA PAYACH') or ($TMPT='CA Wire Domestic (PAYEFT)') or ($TMPT='CA SWIFT Wire (CrossBorder)') or ($TMPT='CA FX SWIFT Wire (FXP)') or ($TMPT='SG PAYACH') or ($TMPT='SG Wire Domestic (PAYEFT)') or ($TMPT='SG FX WIRE (PAYIWT)') or ($TMPT='SG INTERNATIONAL WIRE') or ($TMPT='Leumi Domestic Wire/Cross Border/International/FX'))">
                                     <xsl:if test="not(Payer/Address/Country='')">
                                         <Ctry>
@@ -891,7 +900,7 @@
 								</xsl:if>
                                 <xsl:if test="(($TMPT='AU ACH Low Value') or ($TMPT='AU Wire Domestic') or ($TMPT='AU Wire CrossBorder/FX'))">
                                     <Nm>
-                                        <xsl:value-of select="substring(PayeeBankAccount/BankName,1,140)" />
+                                        <xsl:value-of select="substring(Payee/Name,1,140)" />
                                     </Nm>
                                 </xsl:if>
                             </CdtrAcct>
