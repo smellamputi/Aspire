@@ -42,7 +42,7 @@ select
 ,ATTRIBUTE3||'  '||to_char(sysdate,'mmddyyyyhh24miss') REF2
 ,ATTRIBUTE3||'  '||to_char(sysdate,'mmddyyyyhh24miss') REF4
 ,ATTRIBUTE3||'  '||to_char(sysdate,'mmddyyyyhh24miss') REF5
-,REPORT_ID||'|'||EMPLOYEE_ID||'|'||EMPLOYEE_FIRST_NAME||'|'||EMPLOYEE_LAST_NAME||'|'||REPORT_ENTRY_EXPTYPENAME||'|'||ATTRIBUTE2  REF10 
+,REPORT_ID||'-'||EMPLOYEE_ID||'-'||EMPLOYEE_FIRST_NAME||'-'||EMPLOYEE_LAST_NAME||'-'||REPORT_ENTRY_EXPTYPENAME||'-'||ATTRIBUTE2  REF10 
 from DS_Concur_PaymentBatch_T
 where attribute1 = 'GL' and upper(nvl(status,'NA')) not in ('PROCESSED')
 union  
