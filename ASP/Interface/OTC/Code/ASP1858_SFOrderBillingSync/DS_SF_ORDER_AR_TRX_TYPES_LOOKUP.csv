@@ -1,0 +1,11 @@
+﻿DVM,DS_SF_ORDER_AR_TRX_TYPES_LOOKUP,ASP 6789
+LegalEntity,TransactionType
+"DocuSign, Inc.",DSI_OSS_Invoice
+"SpringCM, Inc",SCM_OSS_Invoice
+"Liveoak Technologies, Inc",LOT_OSS_Invoice
+DocuSign France SAS,DSF_OSS_Invoice
+DocuSign Israel Ltd.,DIS_OSS_Invoice
+Seal Software Limited (UK),SSL_OSS_Invoice
+DocuSign International (EMEA) Limited (Ireland),DIE_OSS_Invoice
+DocuSign International (EMEA) Ltd,DIE_OSS_Invoice
+"SpringCM, Inc.",SCM_OSS_Invoice
