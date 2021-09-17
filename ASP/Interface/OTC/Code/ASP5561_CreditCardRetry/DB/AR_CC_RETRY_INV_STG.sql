@@ -15,7 +15,7 @@
    REM
    REM WHO                  WHAT                                                 WHEN
    REM --------------       ----------------------------------------------      ----------
-   REM Nidhi Chamoli     	Staging Table                  						21/05/2021
+   REM Gowthami Pola     	Staging Table                  						08/07/2021
    REM
    REM ===============================================================================
    REM
@@ -44,7 +44,8 @@ RECORD_ID              		  								NUMBER
 ,LAST_UPDATE_DATE               							DATE           
 ,LAST_UPDATED_BY                							VARCHAR2(64)   
 ,CREATED_BY                     							VARCHAR2(64)   
-,CREATION_DATE                  							DATE           
+,CREATION_DATE                  							DATE
+,RUN_DATE                  									DATE           
 ,CG_ATTR1_VALUE                 							VARCHAR2(500)  
 ,CG_ATTR2_VALUE                 							VARCHAR2(500)  
 ,CG_ATTR3_VALUE                 							VARCHAR2(500)  
@@ -55,13 +56,18 @@ RECORD_ID              		  								NUMBER
 ,RECEIPT_CLASS_ID               							NUMBER         
 ,INTERVAL_TYPE                  							VARCHAR2(100)  
 ,INTERVAL_DIFF                  							NUMBER         
-,LAST_PMT_ATTEMPT_DATE          							DATE  
+,LAST_PMT_ATTEMPT_DATE          							DATE
+,RETRY_TIME                                                 VARCHAR2(100)  
+,DAY                            							NUMBER         
+,HOUR                           							NUMBER  
 ,CONSTRAINT AR_CC_RETRY_INV_STG_RECORD_ID_INSTANCE_ID_PK 	PRIMARY KEY (RECORD_ID,OIC_INSTANCE_ID)
 );
 /
 CREATE INDEX AR_CC_RETRY_INV_STG_CG_ATTR1ATTR2ATTR3ATTR4_IDX ON FUSIONINTEGRATION.AR_CC_RETRY_INV_STG (CG_ATTR1_VALUE,CG_ATTR2_VALUE,CG_ATTR3_VALUE,CG_ATTR4_VALUE ) ;
 
 CREATE INDEX AR_CC_RETRY_INV_STG_INV_RETRY_COUNT_ERROR_LABEL_IDX ON FUSIONINTEGRATION.AR_CC_RETRY_INV_STG (INV_RETRY_COUNT,ERROR_LABEL ) ;
+
+CREATE INDEX AR_CC_RETRY_INV_STG_INV_RETRY_COUNT_INTERVAL_IDX ON FUSIONINTEGRATION.AR_CC_RETRY_INV_STG (RETRY_INTERVAL,INTERVAL_DIFF) ;
 /
 
 SHOW ERRORS
