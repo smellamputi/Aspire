@@ -56,34 +56,37 @@ AS
            FROM fusionintegration.ar_cc_retry_customer_groups
           WHERE active_flag = 'Y'
                 AND customer_group_name =
-                       NVL (p_customer_group, customer_group_name);
+                       NVL (p_customer_group, customer_group_name) order by priority;
 
       CURSOR cur_retry_rules (
-         p_cg_config_id   IN NUMBER,
-         p_cg_retry_id    IN NUMBER)
+         p_customer_group_id   IN NUMBER)
       IS
          WITH inv_stg
            AS (SELECT record_id, oic_instance_id, error_label, customer_group_name, inv_retry_count,last_pmt_attempt_date
            FROM fusionintegration.ar_cc_retry_inv_stg
           WHERE nvl(cg_attr1_value,1) = NVL (  (SELECT attribute_value FROM fusionintegration.ar_cc_retry_cg_config_rules
-                        WHERE attribute_name = cg_attribute1 AND cg_config_id = p_cg_config_id), nvl(cg_attr1_value,1))
+                        WHERE attribute_name = cg_attribute1 AND customer_group_id = p_customer_group_id), nvl(cg_attr1_value,1))
           AND nvl(cg_attr2_value,1) =  NVL (  (SELECT attribute_value FROM fusionintegration.ar_cc_retry_cg_config_rules
-                         WHERE attribute_name = cg_attribute2 AND cg_config_id = p_cg_config_id),  nvl(cg_attr2_value,1)) 
+                         WHERE attribute_name = cg_attribute2 AND customer_group_id = p_customer_group_id),  nvl(cg_attr2_value,1)) 
           AND nvl(cg_attr3_value,1) = NVL (  (SELECT attribute_value FROM fusionintegration.ar_cc_retry_cg_config_rules
-                         WHERE attribute_name = cg_attribute3 AND cg_config_id = p_cg_config_id),  nvl(cg_attr3_value,1))
+                         WHERE attribute_name = cg_attribute3 AND customer_group_id = p_customer_group_id),  nvl(cg_attr3_value,1))
           AND NVL (cg_attr4_value, 1) =  NVL ( (SELECT attribute_value FROM fusionintegration.ar_cc_retry_cg_config_rules
-                         WHERE attribute_name = cg_attribute4 AND cg_config_id = p_cg_config_id), NVL(cg_attr4_value, 1))
+                         WHERE attribute_name = cg_attribute4 AND customer_group_id = p_customer_group_id), NVL(cg_attr4_value, 1))
           AND oic_instance_id = p_instance_id)
-      SELECT (SELECT max(attempt_id) from fusionintegration.ar_cc_retry_cg_retry_rules cgr1 where cgr1.cg_retry_id = p_cg_retry_id and cgr1.error_label = inv_stg.error_label ) retry_count,
+      SELECT (SELECT max(attempt_id) from fusionintegration.ar_cc_retry_cg_retry_rules cgr1 where cgr1.customer_group_id = customer_group_id and cgr1.error_label = inv_stg.error_label ) retry_count,
              cgr.retry_interval,
              cgr.interval_type,
              inv_stg.record_id,
              cgr.customer_group_name,
-             ROUND((TO_DATE(SYSDATE,'DD-MON-YY HH24:MI:SS')-TO_DATE(inv_stg.last_pmt_attempt_date,'DD-MON-YY HH24:MI:SS'))*(DECODE(cgr.interval_type,'HOURS',24,'MINS',1440,'DAY',1)),2) interval_diff
+             cgr.day,
+             cgr.hour,
+             cgr.retry_time,
+             (CASE cgr.retry_time WHEN 'Incremental' THEN ROUND((TO_DATE(SYSDATE,'DD-MON-YY HH24:MI:SS')-TO_DATE(inv_stg.last_pmt_attempt_date,'DD-MON-YY HH24:MI:SS'))*(DECODE(cgr.interval_type,'Hours',24,'Minutes',1440,'Days',1)),2) ELSE (TRUNC(SYSDATE) - TRUNC(inv_stg.last_pmt_attempt_date)) END) interval_diff
         FROM inv_stg, fusionintegration.ar_cc_retry_cg_retry_rules cgr
-       WHERE     cgr.cg_retry_id = p_cg_retry_id
+       WHERE     cgr.customer_group_id = p_customer_group_id
              AND cgr.error_label = inv_stg.error_label 
-			 AND cgr.attempt_id= inv_stg.inv_retry_count
+			 AND cgr.attempt_id= inv_stg.inv_retry_count + 1
+             AND cgr.action = 'Retry'
              AND inv_stg.customer_group_name IS NULL
              AND inv_stg.oic_instance_id = p_instance_id;
 
@@ -97,8 +100,18 @@ AS
          SELECT record_id
            FROM fusionintegration.ar_cc_retry_inv_stg
           WHERE     oic_instance_id = p_instance_id
-                AND inv_retry_count <= retry_count
+                AND inv_retry_count < retry_count
                 AND interval_diff >= retry_interval
+                AND retry_time = 'Incremental'
+                AND customer_group_name IS NOT NULL
+        UNION
+         SELECT record_id
+           FROM fusionintegration.ar_cc_retry_inv_stg
+          WHERE     oic_instance_id = p_instance_id
+                AND inv_retry_count < retry_count
+                AND interval_diff >= day
+                AND TO_CHAR(SYSDATE,'HH24') >= hour
+                AND retry_time <> 'Incremental'
                 AND customer_group_name IS NOT NULL;
 
       TYPE CgEligInvTyp IS TABLE OF cur_eligible_invoices%ROWTYPE
@@ -163,7 +176,7 @@ AS
             BEGIN
                DBMS_OUTPUT.put_line (rec.customer_group_name);
 
-               OPEN cur_retry_rules (rec.cg_config_id, rec.cg_retry_id); --update retry count and retry interval for all invoices
+               OPEN cur_retry_rules (rec.customer_group_id); --update retry count and retry interval for all invoices
 
                LOOP
                   FETCH cur_retry_rules
@@ -185,6 +198,12 @@ AS
                                   var_retryrules_tbl (rec_upd).interval_type,
                                interval_diff =
                                   var_retryrules_tbl (rec_upd).interval_diff,
+                               retry_time =
+                                  var_retryrules_tbl (rec_upd).retry_time,
+                               day =
+                                  var_retryrules_tbl (rec_upd).day,
+                               hour =
+                                  var_retryrules_tbl (rec_upd).hour,
                                last_update_date = SYSDATE,
                                last_updated_by = gc_user_name
                          WHERE record_id =
