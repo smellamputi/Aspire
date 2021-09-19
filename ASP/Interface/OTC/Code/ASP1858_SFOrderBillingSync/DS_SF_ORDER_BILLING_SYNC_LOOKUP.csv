@@ -1,0 +1,48 @@
+﻿DVM,DS_SF_ORDER_BILLING_SYNC_LOOKUP,
+Id,Name,Value,Description,APTTUS,Oracle
+1,BusinessUnitName,US BU USD,To be derived,,
+2,SubscriptionProfileName,DS Default,,,
+3,DefinitionOrganizationName,DocuSign Item Master,,,
+4,DefinitionOrganizationId,300000002823935,,,
+5,PaymentTermsName,30 Net,Not Used,,
+6,InternalApproval,NOTREQUIRED,,,
+7,PaymentMethod,ORA_PURCHASE_ORDER,DNU,,
+8,PaymentMethodName,Purchase order,,,
+9,TransactionType,ORA_SUBSCRIPTION,,,
+10,BillingFrequency,zzJ,,,
+11,BillingFrequencyName,MTH,,,
+12,AccountingRuleId,1,,,
+13,SubscriptionInvoiceText,[$Product Name]: [$Charge Name] [$Bill from Date]-[$Bill to Date],,,
+14,AccountingRuleName,Immediate,,,
+15,TransactionTypeName,DS_OSS_Invoice,,,
+16,PricingSystem,ORA_FUSION,,,
+17,LineStatus,ORA_ACTIVE,,,
+18,ChargeName,Recurring Sale Price,,,
+19,ChargeDefinition,QP_RECURRING_SALE_PRICE,,,
+20,PricePeriodicity,zzH,,,
+21,PriceType,RECURRING,,,
+22,PartialPeriodType,ORA_ACTUAL,,,
+23,PartialPeriodStart,ORA_SERVICE,,,
+24,GenerateBillingSchedule,Y,,,
+25,BillingSystem,ORA_OSS_FUSION,ORA_OSS_FUSION,,
+26,BillService,ORA_BILL,ORA_BILL,,
+30,BillingFrequencyLookup,12,YR,Year,YR
+31,BillingFrequencyLookup,3,QTR,Quarterly,QTR
+32,BillingFrequencyLookup,6,BI,Biannual,BI
+33,BillingFrequencyLookup,1,MT,Month,MT
+34,BillingFrequencyLookup,12,AN,Annual,AN
+35,BillingFrequencyLookup,1,YR,Upfront,UP
+36,BillingFrequencyLookup,6,SA,Semi-Annual,SA
+37,BillingFrequencyLookup,1,MT,Monthly,MT
+40,PaymentMethodLookup,,,Credit Card,Credit card
+41,PaymentMethodLookup,,,Check,Wire
+42,PaymentMethodLookup,,,Purchase Order,Purchase order
+50,PaymentTermLookup,,,Net 10,Net 10
+51,PaymentTermLookup,,,Net 30,Net 30
+52,PaymentTermLookup,,,Net 45,Net 45
+53,PaymentTermLookup,,,Net 60,Net 60
+54,PaymentTermLookup,,,30 Net,30 Net
+55,PaymentTermLookup,,,Due On Receipt,Due On Receipt
+90,BillToSiteUseId,300000004689455,Abhishek Grover Site Id,,
+91,InstrAssignmentId,15001,Abhishek Grover Credit Card Instrument ID,,
+92,LegalEntityName,"DocuSign, Inc.",,"DocuSign, Inc.","DocuSign, Inc."
