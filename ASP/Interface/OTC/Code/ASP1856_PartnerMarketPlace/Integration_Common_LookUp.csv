@@ -1,0 +1,9 @@
+﻿DVM,Integration_Common_LookUp,"It fetches the data for BU. LE, Country, Billing frequency"
+SourceCountryValue,OracleCountryValue,SourceBillingFrequency,OracleBillingFrequency,BusinessUnitName,LegalEnityName,InterfaceId
+United States,US,Monthly,MT,US BU USD,"DocuSign, Inc.",ASP1856
+,,Annual,AN,,,ASP1856
+,,Day,ONT,,,ASP1856
+,,Quarterly,QTR,,,ASP1856
+,,Semi-Annual,SA,,,ASP1856
+,,Upfront,UP,,,ASP1856
+,,Year,YR,,,ASP1856
