@@ -1,12 +1,12 @@
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-       ADP_PKG_EXEC_STATUS TABLE SCRIPT
+       AP_XACTLY_SRC_TYPE TABLE SCRIPT
        $Version 1.0
    REM ============================================================================
    REM
-   REM NAME...: ADP_PKG_EXEC_STATUS
+   REM NAME...: AP_XACTLY_SRC_TYPE
 
    REM
-   REM DESC...: Execution Status Table for ASP-1909 ADP To Oracle GL
+   REM DESC...: Source Type Table for ASP-1913 Xactly To Oracle Payables
    REM
    REM
    REM FILES..: none
@@ -15,18 +15,29 @@
    REM
    REM WHO                  WHAT                                                 WHEN
    REM --------------       ----------------------------------------------      ----------
-   REM Divyanshu Anand     	Execution Status Table                               06/05/2021
+   REM Divyanshu Anand     	Insertion Source Type Object                         09/20/2021
    REM
    REM ===============================================================================
    REM
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-DROP TABLE ADP_PKG_EXEC_STATUS;
-/
-CREATE TABLE ADP_PKG_EXEC_STATUS(
-IDENTIFIER VARCHAR2(100),
-EXEC_STATUS VARCHAR2(1)
+   
+DROP TYPE AP_XACTLY_SRC_REC_TYPE;
+
+DROP TYPE AP_XACTLY_SRC_TYPE;
+
+CREATE OR REPLACE TYPE AP_XACTLY_SRC_TYPE AS OBJECT (
+    CODE_IDENTIFIER  VARCHAR2(300),
+    INVOICE_ID       VARCHAR2(300),
+    BUSINESS_UNIT    VARCHAR2(300),
+    INVOICE_NUMBER   VARCHAR2(300),
+    INVOICE_AMOUNT   VARCHAR2(300),
+    INVOICE_DATE     VARCHAR2(300),
+    DESCRIPTION      VARCHAR2(300),
+    LEGAL_ENTITY     VARCHAR2(300),
+    ACCOUNTING_DATE  VARCHAR2(300),
+    SEQ              NUMBER
 );
 /
 SHOW ERRORS

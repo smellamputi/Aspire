@@ -1,12 +1,12 @@
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-       ADP_PKG_EXEC_STATUS TABLE SCRIPT
+       XACTLY_SEQ TABLE SCRIPT
        $Version 1.0
    REM ============================================================================
    REM
-   REM NAME...: ADP_PKG_EXEC_STATUS
+   REM NAME...: XACTLY_SEQ
 
    REM
-   REM DESC...: Execution Status Table for ASP-1909 ADP To Oracle GL
+   REM DESC...: Execution Sequence for ASP-1913 Xactly To Oracle Payables
    REM
    REM
    REM FILES..: none
@@ -15,19 +15,22 @@
    REM
    REM WHO                  WHAT                                                 WHEN
    REM --------------       ----------------------------------------------      ----------
-   REM Divyanshu Anand     	Execution Status Table                               06/05/2021
+   REM Divyanshu Anand     	Execution Sequence                                     09/20/2021
    REM
    REM ===============================================================================
    REM
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-DROP TABLE ADP_PKG_EXEC_STATUS;
-/
-CREATE TABLE ADP_PKG_EXEC_STATUS(
-IDENTIFIER VARCHAR2(100),
-EXEC_STATUS VARCHAR2(1)
-);
+DROP SEQUENCE "FUSIONINTEGRATION"."XACTLY_SEQ";
+
+CREATE SEQUENCE "FUSIONINTEGRATION"."XACTLY_SEQ"
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1
+    MAXVALUE 1000000
+    CYCLE
+    CACHE 2;
 /
 SHOW ERRORS
 /

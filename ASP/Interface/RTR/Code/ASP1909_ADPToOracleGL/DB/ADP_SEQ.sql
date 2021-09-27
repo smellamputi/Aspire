@@ -6,7 +6,7 @@
    REM NAME...: ADP_SEQ
 
    REM
-   REM DESC...: Execution Sequence for ASP-1909 ADP To Oracel GL
+   REM DESC...: Execution Sequence for ASP-1909 ADP To Oracle GL
    REM
    REM
    REM FILES..: none
