@@ -6,7 +6,7 @@
    REM NAME...: GL_ADP_SRC_TBL
 
    REM
-   REM DESC...: Source Table for ASP-1909 ADP To Oracel GL
+   REM DESC...: Source Table for ASP-1909 ADP To Oracle GL
    REM
    REM
    REM FILES..: none

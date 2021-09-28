@@ -1,0 +1,9 @@
+﻿DVM,Customer_LE_Tax_Regime_Codes,
+Country,TaxRegimeCode
+Australia,AVATAX AU OUTPUT GST
+France,AVATAX FR OUTPUT VAT
+Ireland,AVATAX IE OUTPUT VAT
+Israel,AVATAX IL OUTPUT VAT
+Singapore,AVATAX SG OUTPUT GST
+United States,AVATAX US SALES AND USE TAX
+Canada,AVATAX CA OUTPUT GST

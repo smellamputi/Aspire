@@ -6,7 +6,7 @@
    REM NAME...: ADP_PKG_EXEC_STATUS
 
    REM
-   REM DESC...: Execution Status Table for ASP-1909 ADP To Oracel GL
+   REM DESC...: Execution Status Table for ASP-1909 ADP To Oracle GL
    REM
    REM
    REM FILES..: none
