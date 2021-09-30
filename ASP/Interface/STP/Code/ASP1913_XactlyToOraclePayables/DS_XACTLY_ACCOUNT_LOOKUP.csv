@@ -1,0 +1,6 @@
+﻿DVM,DS_XACTLY_ACCOUNT_LOOKUP,
+Attribute1,YearCheck,Multiperiod_Accounting_Accrual_Account,Distribution_Combination,SrcValue
+sales commision deferal,1,.0000.156101.000.0000.000000,.523005.000.0000.000000,1
+sales commision deferal payroll taxes,1,.0000.156102.000.0000.000000,.527005.000.0000.000000,2
+sales commision deferal,0,.0000.115306.000.0000.000000,.523005.000.0000.000000,3
+sales commision deferal payroll taxes,0,,,4
