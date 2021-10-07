@@ -1,3 +1,27 @@
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+       Invoice_DM TABLE SCRIPT
+       $Version 1.0
+   REM ============================================================================
+   REM
+   REM NAME...: Invoice_DM
+
+   REM
+   REM DESC...: Stage Table for ASP-5422 AR OB YAYPAY
+   REM
+   REM
+   REM FILES..: none
+   REM
+   REM HISTORY:
+   REM
+   REM WHO                     WHAT                                                          WHEN
+   REM --------------         ----------------------------------------------                 ----------
+   REM Satarupa Chakraborty     Stage Table to store Invoice and Debit Memo Information      09/07/2021
+   REM
+   REM ===============================================================================
+   REM
+   REM ===================================================================================
+
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 CREATE TABLE CREATE_INVOICE_DM_SRC_TBL(
 CODE_IDENTIFIER               VARCHAR2(5000),  
 SEQ                           VARCHAR2(5000),  
