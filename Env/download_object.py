@@ -7,6 +7,7 @@ import sys
 import argparse
 import re
 import base64
+import os
 
 
 def process_download_objects(paramDict):
@@ -61,20 +62,21 @@ def process_upload_objects(paramDict,reportBaseStr):
     headers = {'Accept':'*/*','Content-Type':'text/xml','soapAction':''}
     baseurl = paramDict['surl']
     url = baseurl+'/xmlpserver/services/v2/CatalogService'
-    reportPath = paramDict['rtpath']+'/'+paramDict['otname']
+    reportPath = os.path.join(paramDict['rtpath'],paramDict['otname'])
+    oType = paramDict['otype']+'z'
 
     payload="""<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://xmlns.oracle.com/oxp/service/v2">
                 <soapenv:Header/>
                 <soapenv:Body>
                     <v2:uploadObject>
                         <v2:reportObjectAbsolutePathURL>{reportPath}</v2:reportObjectAbsolutePathURL>
-                        <v2:objectType>xdoz</v2:objectType>
+                        <v2:objectType>{otype}</v2:objectType>
                         <v2:objectZippedData>{bdata}</v2:objectZippedData>
                         <v2:userID>{user}</v2:userID>
                         <v2:password>{pwd}</v2:password>
                     </v2:uploadObject>
                 </soapenv:Body>
-                </soapenv:Envelope>""".format(reportPath=reportPath,user=username,pwd=password,bdata=reportBaseStr)
+                </soapenv:Envelope>""".format(reportPath=reportPath,otype=oType,user=username,pwd=password,bdata=reportBaseStr)
     
     print('sending request to : ' + url)
     print('payload getting submitted : ' + payload)
@@ -100,11 +102,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--username", "-u", help="set bi username")
     parser.add_argument("--password", "-p", help="set bi password")
-    parser.add_argument("--surl", "-t", help="set source application URL")
+    parser.add_argument("--surl", "-s", help="set source application URL")
     parser.add_argument("--rpath", "-r", help="source report absolute path")
     parser.add_argument("--rtpath", "-rt", help="target report absolute path")
     parser.add_argument("--oname", "-on", help="source object name")
     parser.add_argument("--otname", "-ot", help="target object name")
+    parser.add_argument("--otype", "-t", help="source object type")
     args = parser.parse_args()
     
     #dictionary with parameters
@@ -128,6 +131,9 @@ if __name__ == "__main__":
     if args.oname:
         print("object name : %s" % args.oname)
         paramDict['oname'] = args.oname
+    if args.otype:
+        print("object type : %s" % args.otype)
+        paramDict['otype'] = args.otype
     if args.otname:
         print("object name : %s" % args.otname)
         paramDict['otname'] = args.otname
@@ -136,7 +142,8 @@ if __name__ == "__main__":
     #saveFile(reportBaseStr,paramDict['oname'])
 
     filename = paramDict['oname']
-    reportBaseStr = getFileBase64(filename)
+    repPath = paramDict['rpath']
+    reportBaseStr = getFileBase64(os.path.join(repPath,filename))
     #print(reportBaseStr)
 
     
