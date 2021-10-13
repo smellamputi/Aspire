@@ -1,0 +1,46 @@
+﻿DVM,draft_subscription_criteria,,draft_subscription_criteria
+Legal_Entity,Order_Type,Order_Sub_Type,TCV,Status,Composite_Key
+"DocuSign, Inc.",New Business,,0,Active,"DocuSign, Inc.|New Business||Active"
+"DocuSign, Inc.",New Business,Expansion,0,Active,"DocuSign, Inc.|New Business|Expansion|Active"
+"DocuSign, Inc.",New Business,Upgrade from Web,0,Draft,"DocuSign, Inc.|New Business|Upgrade from Web|Draft"
+"DocuSign, Inc.",New Business,Pro Serve / Training Only,0,Active,"DocuSign, Inc.|New Business|Pro Serve / Training Only|Active"
+"DocuSign, Inc.",Add-on,New Business,0,Active,"DocuSign, Inc.|Add-on|New Business|Active"
+"DocuSign, Inc.",Renewal,On Time,0,Active,"DocuSign, Inc.|Renewal|On Time|Active"
+"DocuSign, Inc.",Renewal,Early Renewal,0,Active,"DocuSign, Inc.|Renewal|Early Renewal|Active"
+"DocuSign, Inc.",Pilot,,0,Active,"DocuSign, Inc.|Pilot||Active"
+"DocuSign, Inc.",Courtesy,,0,Active,"DocuSign, Inc.|Courtesy||Active"
+"DocuSign, Inc.",Adjustment,Entire Subscription,0,Active,"DocuSign, Inc.|Adjustment|Entire Subscription|Active"
+"DocuSign, Inc.",Adjustment,Add-on,0,Active,"DocuSign, Inc.|Adjustment|Add-on|Active"
+DocuSign International (EMEA) Limited,New Business,,0,Active,DocuSign International (EMEA) Limited|New Business||Active
+DocuSign International (EMEA) Limited,New Business,Expansion,0,Active,DocuSign International (EMEA) Limited|New Business|Expansion|Active
+DocuSign International (EMEA) Limited,New Business,Upgrade from Web,0,Active,DocuSign International (EMEA) Limited|New Business|Upgrade from Web|Active
+DocuSign International (EMEA) Limited,New Business,Pro Serve / Training Only,0,Active,DocuSign International (EMEA) Limited|New Business|Pro Serve / Training Only|Active
+DocuSign International (EMEA) Limited,Add-on,New Business,0,Active,DocuSign International (EMEA) Limited|Add-on|New Business|Active
+DocuSign International (EMEA) Limited,Renewal,On Time,0,Active,DocuSign International (EMEA) Limited|Renewal|On Time|Active
+DocuSign International (EMEA) Limited,Renewal,Early Renewal,0,Active,DocuSign International (EMEA) Limited|Renewal|Early Renewal|Active
+DocuSign International (EMEA) Limited,Pilot,,0,Active,DocuSign International (EMEA) Limited|Pilot||Active
+DocuSign International (EMEA) Limited,Courtesy,,0,Active,DocuSign International (EMEA) Limited|Courtesy||Active
+DocuSign International (EMEA) Limited,Adjustment,Entire Subscription,0,Active,DocuSign International (EMEA) Limited|Adjustment|Entire Subscription|Active
+DocuSign International (EMEA) Limited,Adjustment,Add-on,0,Active,DocuSign International (EMEA) Limited|Adjustment|Add-on|Active
+DocuSign France SAS,New Business,,0,Active,DocuSign France SAS|New Business||Active
+DocuSign France SAS,New Business,Expansion,0,Active,DocuSign France SAS|New Business|Expansion|Active
+DocuSign France SAS,New Business,Upgrade from Web,0,Active,DocuSign France SAS|New Business|Upgrade from Web|Active
+DocuSign France SAS,New Business,Pro Serve / Training Only,0,Active,DocuSign France SAS|New Business|Pro Serve / Training Only|Active
+DocuSign France SAS,Add-on,New Business,0,Active,DocuSign France SAS|Add-on|New Business|Active
+DocuSign France SAS,Renewal,On Time,0,Active,DocuSign France SAS|Renewal|On Time|Active
+DocuSign France SAS,Renewal,Early Renewal,0,Active,DocuSign France SAS|Renewal|Early Renewal|Active
+DocuSign France SAS,Pilot,,0,Active,DocuSign France SAS|Pilot||Active
+DocuSign France SAS,Courtesy,,0,Active,DocuSign France SAS|Courtesy||Active
+DocuSign France SAS,Adjustment,Entire Subscription,0,Active,DocuSign France SAS|Adjustment|Entire Subscription|Active
+DocuSign France SAS,Adjustment,Add-on,0,Active,DocuSign France SAS|Adjustment|Add-on|Active
+"SpringCM, Inc.",New Business,,0,Active,"SpringCM, Inc.|New Business||Active"
+"SpringCM, Inc.",New Business,Expansion,0,Active,"SpringCM, Inc.|New Business|Expansion|Active"
+"SpringCM, Inc.",New Business,Upgrade from Web,0,Active,"SpringCM, Inc.|New Business|Upgrade from Web|Active"
+"SpringCM, Inc.",New Business,Pro Serve / Training Only,0,Active,"SpringCM, Inc.|New Business|Pro Serve / Training Only|Active"
+"SpringCM, Inc.",Add-on,New Business,0,Active,"SpringCM, Inc.|Add-on|New Business|Active"
+"SpringCM, Inc.",Renewal,On Time,0,Active,"SpringCM, Inc.|Renewal|On Time|Active"
+"SpringCM, Inc.",Renewal,Early Renewal,0,Active,"SpringCM, Inc.|Renewal|Early Renewal|Active"
+"SpringCM, Inc.",Pilot,,0,Active,"SpringCM, Inc.|Pilot||Active"
+"SpringCM, Inc.",Courtesy,,0,Active,"SpringCM, Inc.|Courtesy||Active"
+"SpringCM, Inc.",Adjustment,Entire Subscription,0,Active,"SpringCM, Inc.|Adjustment|Entire Subscription|Active"
+"SpringCM, Inc.",Adjustment,Add-on,0,Active,"SpringCM, Inc.|Adjustment|Add-on|Active"

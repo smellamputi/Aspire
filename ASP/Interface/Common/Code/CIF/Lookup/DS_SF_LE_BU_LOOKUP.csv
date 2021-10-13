@@ -1,0 +1,25 @@
+﻿DVM,DS_SF_LE_BU_LOOKUP,DS_SF_LE_BU_LOOKUP,ds_sf_le_bu_lookup
+Apttus_Legal_Entity,ERP_BU_Name,ERP_Legal_Entity,Default,BUID,Xactly_Legal_Entity,Business_Unit,Xactly_Legal_Entity_Segment,ERP_Legal_Entity_Id,ERP_Currency
+DocuSign France SAS,FR BU EUR,DocuSign France SAS,DocuSign France SAS,300000003059362,DocuSign France,FR BU EUR,440,300000002915180,EUR
+DocuSign International (EMEA) Ltd,IE BU EUR,DocuSign International (EMEA) Limited,DocuSign International (EMEA) Limited,300000003059323,DocuSign Ireland,IE BU EUR,400,300000002915418,EUR
+DocuSign Israel Ltd.,IL BU ILS,DocuSign Israel Ltd.,DocuSign Israel Ltd.,300000003059427,DocuSign Israel,IL BU ILS,501,300000002915339,ILS
+DocuSign Acquisition Ltd.,IL BU USD,DocuSign Acquisition Ltd.,DocuSign Acquisition Ltd.,300000003059414,DocuSign Acquisition Ltd.,IL BU USD,500,300000002915325,USD
+DocuSign UK Ltd,UK BU GBP,DocuSign UK Limited,DocuSign UK Limited,300000003059336,"DocuSign United Kingdom, Limited",UK BU GBP,410,300000002915253,GBP
+,UK BU USD,Seal Software Group Limited,Seal Software Group Limited,300000003059336,Seal Software Group (Holding) Ltd,UK BU USD,450,300000002915281,USD
+Seal Software Limited (UK),UK BU USD,Seal Software Limited (UK),Seal Software Limited (UK),300000003059258,Seal Software Limited,US BU USD,451,300000002915152,USD
+"DocuSign, Inc.",US BU USD,"DocuSign, Inc.","DocuSign, Inc.",300000003059258,"DocuSign, Inc.",US BU USD,100,300000002915082,USD
+"DocuSign International, Inc.",US BU USD,"DocuSign International, Inc.","DocuSign International, Inc.",300000003059258,"DocuSign International, Inc.",US BU USD,101,300000002915096,USD
+DocuSign Canada Ltd.,CA BU CAD,DocuSign Canada Ltd.,DocuSign Canada Ltd.,300000003059271,DocuSign Canada,CA BU CAD,102,300000002915194,GBP
+ARX Inc.,US BU USD,ARX Inc.,ARX Inc.,300000003059258,,US BU USD,110,300000002915110,USD
+"SpringCM, Inc",US BU USD,SpringCM Inc.,SpringCM Inc.,300000003059258,SpringCM Inc.,US BU USD,120,300000002915166,USD
+"Liveoak Technologies, Inc",US BU USD,"Liveoak Technologies, Inc","Liveoak Technologies, Inc",300000003059258,,US BU USD,130,300000002915138,USD
+DocuSign Brazil LLC,BR BU BRL,DocuSign Brasil Participações Ltda.,DocuSign Brasil Participações Ltda.,,DocuSign Brazil,BR BU BRL,140,300000002915367,BRL
+Seal Software Inc (US),US BU USD,"Seal Software, Inc.","Seal Software, Inc.",300000003059258,Seal Software Inc.,US BU USD,150,300000002915152,USD
+,SG BU SGD,DocuSign International (Asia-Pacific) Private Limited,DocuSign International (Asia-Pacific) Private Limited,300000003059284,DocuSign Singapore,SG BU SGD,300,300000002915210,SGD
+,AU BU USD,"DocuSign International, Inc. (Australia Branch)","DocuSign International, Inc. (Australia Branch)",300000003059297,DocuSign Australia,AU BU USD,310,300000002915224,USD
+,JP BU JPY,DocuSign Japan KK,DocuSign Japan KK,300000003059310,DocuSign Japan,JP BU JPY,320,300000002915239,JPY
+,DE BU EUR,DocuSign Germany GmbH,,300000003059349,DocuSign Germany,DE BU EUR,420,300000002915267,EUR
+,EG BU EGP,Seal Software Egypt LLC,Seal Software Egypt LLC,300000003059440,Seal Software Egypt LLC,EG BU EGP,550,300000002915353,EGP
+,MX BU MXN,DocuSign Mexico S. de R.L. de C.V.,DocuSign Mexico S. de R.L. de C.V.,300000003059453,"DocuSign Mexico, S. de R.L. de C.V.",MX BU MXN,650,300000002915403,MXN
+,NO BU USD,Seal Software Norway AS,Seal Software Norway AS,300000003059401,Seal Software Norway AS,NO BU USD,453,300000002915311,USD
+,SE BU SEK,Contract Analytics Development Sweden AB,Contract Analytics Development Sweden AB,300000003059388,Contract Analytics Development Sweden AB,SE BU SEK,452,300000002915297,SEK

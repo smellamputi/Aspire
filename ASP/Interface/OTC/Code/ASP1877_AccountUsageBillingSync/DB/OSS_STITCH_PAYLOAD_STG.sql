@@ -27,17 +27,16 @@ DROP TABLE "FUSIONINTEGRATION"."OSS_STITCH_PAYLOAD_STG";
 
 CREATE TABLE "FUSIONINTEGRATION"."OSS_STITCH_PAYLOAD_STG" 
    (            
-	record_id        NUMBER,
-    run_date_time    VARCHAR2(100),
+   record_id        NUMBER,
+    run_date_time    TIMESTAMP,
     interface_id     VARCHAR2(10),
     interface_name   VARCHAR2(120),
     instance_id      VARCHAR2(20),
     trackingid       VARCHAR2(240),
     s3downloadlink   VARCHAR2(4000),
-	status VARCHAR2(4),
-	message VARCHAR2(4000),
-	PRIMARY KEY (record_id,instance_id)
+    status 	     VARCHAR2(4),
+    message 	     VARCHAR2(20000)
    );
 /
-SHOW ERRORS;
+SHOW ERRORS
 /
