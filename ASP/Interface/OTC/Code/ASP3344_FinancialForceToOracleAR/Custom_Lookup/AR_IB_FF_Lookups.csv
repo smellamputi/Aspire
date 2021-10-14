@@ -1,4 +1,4 @@
-﻿DVM,AR_IB_FF_Lookups,,,,,,,,,,,,,
+﻿DVM,AR_IB_FF_Lookups,
 Config_Name,config_value,LE_Name,ERP_ReasonCode,Product_Code,Payment_Terms,UOM,LE_Identifier,TransactionType,Tax_Regime,Tax,Tax_Jurisdiction,Tax_Status,Tax_Rate_Code,Default_Taxation_Country
 "DocuSign, Inc.",US BU USD,"DocuSign, Inc.",,,,,DS001,DSI FF Invoice,US FF SALES TAX,US FF SALES TAX,UNITED STATES,STANDARD,US FF SALES TAX STANDARD,US
 SpringCM,US BU USD,"SpringCM, Inc.",,,,,DS004,SCM FF Invoice,US FF SALES TAX,US FF SALES TAX,UNITED STATES,STANDARD,US FF SALES TAX STANDARD,US
