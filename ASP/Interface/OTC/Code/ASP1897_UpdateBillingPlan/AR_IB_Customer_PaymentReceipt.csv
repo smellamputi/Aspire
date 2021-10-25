@@ -1,0 +1,14 @@
+﻿DVM,AR_IB_Customer_PaymentReceipt,
+ContractingEntity-Currency,PaymentReceipt
+"DocuSign, Inc.-USD",CC JPM USD DS US
+"DocuSign, Inc.-CAD",CC BOFA CAD DS US
+"DocuSign, Inc.-GBP",CC BOFA GBP DS US
+"DocuSign, Inc.-EUR",CC BOFA EUR DS US
+"DocuSign, Inc.-AUD",CC BOFA AUD DS US
+DocuSign International (EMEA) Limited-USD,CC BOFA USD DS IE
+DocuSign International (EMEA) Limited-GBP,CC BOFA GBP DS IE
+DocuSign International (EMEA) Limited-EUR,CC BOFA USD DS IE
+DocuSign France SAS-USD,DS CC EUR DS INTL
+"SpringCM, Inc.-GBP",CC BOFA GBP SCM US
+"SpringCM, Inc.-EUR",CC BOFA EUR SCM US
+"SpringCM, Inc.-USD",CC BOFA USD SCM US
