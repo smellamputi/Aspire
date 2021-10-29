@@ -22,9 +22,11 @@
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-DROP TYPE "fusionintegration"."usagedata_rec_type" ;
+DROP TYPE usagedata_tbl_type;
 /
-CREATE OR REPLACE TYPE "fusionintegration"."usagedata_rec_type" AS OBJECT (
+DROP TYPE usagedata_rec_type ;
+/
+CREATE OR REPLACE TYPE usagedata_rec_type AS OBJECT (
     record_id    NUMBER,
     dsaccountid  VARCHAR2(240),
     uom          VARCHAR2(50),
@@ -34,8 +36,6 @@ CREATE OR REPLACE TYPE "fusionintegration"."usagedata_rec_type" AS OBJECT (
     usageid      VARCHAR2(240)
 );
 /
-DROP TYPE "fusionintegration"."usagedata_tbl_type";
-/ 
 CREATE OR REPLACE TYPE usagedata_tbl_type AS TABLE OF usagedata_rec_type;
 /
 SHOW ERRORS
