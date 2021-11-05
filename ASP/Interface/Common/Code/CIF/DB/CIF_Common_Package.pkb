@@ -2167,8 +2167,8 @@ END generate_email_body; */
                 nvl(l_sequence_number, 0) + 1,
                 SYSDATE,
                 'Error',
-                'No Data Found', -- changed by Lochana on 11/06
-                'No Data Found', -- changed by Lochana on 11/06
+                sys.standard.sqlcode,
+                sys.standard.sqlerrm,
                 'The p_message_type: '
                 || p_message_type
                 || ' AND p_stage: '
