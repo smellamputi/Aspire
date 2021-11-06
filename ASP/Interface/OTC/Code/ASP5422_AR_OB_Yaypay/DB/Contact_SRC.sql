@@ -22,6 +22,9 @@
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+DROP TABLE FUSIONINTEGRATION.CREATE_CONTACT_SRC_TBL;
+/
+
 CREATE TABLE CREATE_CONTACT_SRC_TBL(
 CODE_IDENTIFIER               VARCHAR2(5000), 
 SEQ                           VARCHAR2(5000), 
