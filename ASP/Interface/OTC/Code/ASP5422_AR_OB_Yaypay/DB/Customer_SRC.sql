@@ -22,6 +22,8 @@
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+DROP TABLE FUSIONINTEGRATION.CREATE_CUSTOMER_SRC_TBL;
+/
 
 CREATE TABLE CREATE_CUSTOMER_SRC_TBL(
 CODE_IDENTIFIER                       VARCHAR2(5000), 

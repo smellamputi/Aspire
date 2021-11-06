@@ -1,8 +1,8 @@
-@DS_YayPay_LastRun;
-@Customer_SRC;
-@Contact_SRC;
-@Invoice_DM;
-@CreditM_SRC;
-@Adjustment_SRC;
-@Receipt_SRC;
-@AR_YAYPAY_LAST_UPDATE_PROC;
+@DS_YayPay_LastRun.sql;
+@Customer_SRC.sql;
+@Contact_SRC.sql;
+@Invoice_DM.sql;
+@CreditM_SRC.sql;
+@Adjustment_SRC.sql;
+@Receipt_SRC.sql;
+@AR_YAYPAY_LAST_UPDATE_PROC.sql;
