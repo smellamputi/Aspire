@@ -1,4 +1,28 @@
-CREATE OR REPLACE PACKAGE BODY ds_oss_account_usg_pkg AS
+create or replace PACKAGE BODY ds_oss_account_usg_pkg AS
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+       DS_OSS_ACCOUNT_USG_PKG TABLE SCRIPT
+       $Version 1.0
+   REM ============================================================================
+   REM
+   REM NAME...: DS_OSS_ACCOUNT_USG_PKG
+   REM
+   REM DESC...: Package to insert values in Account Usage Stage
+   REM
+   REM
+   REM
+   REM
+   REM HISTORY:
+   REM
+   REM WHO                  WHAT                                                 WHEN
+   REM --------------       ----------------------------------------------      ----------
+   REM Rohit Srivastava     Initial Version                                     03/05/2021
+   REM
+   REM ===============================================================================
+   REM
+   REM ===================================================================================
+
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
     errcode  NUMBER := sqlcode;
     errmsg   VARCHAR2(32000) := sqlerrm;
@@ -363,7 +387,7 @@ CREATE OR REPLACE PACKAGE BODY ds_oss_account_usg_pkg AS
                                         usagedate = regexp_substr(stg.usagedate, '[^(T)]+')
                                     AND dsaccount = stg.dsaccountid
                                     AND uom = stg.uom
-                            ) > 0  THEN
+                            ) > 0 THEN
                                 'P'
                             WHEN (
                                 SELECT
@@ -434,7 +458,6 @@ CREATE OR REPLACE PACKAGE BODY ds_oss_account_usg_pkg AS
                         END
                 WHERE
                     stg.process_flag <> 'P';
-
                 COMMIT;
             END;
 
@@ -451,6 +474,7 @@ CREATE OR REPLACE PACKAGE BODY ds_oss_account_usg_pkg AS
                             AND dsaccountid = res.dsaccount
                             AND uom = res.uom
                             AND regexp_substr(usagedate, '[^(T)]+') = res.usagedate
+                            and schedule_instance_id = p_schedule_instance_id
                     );
 
                 COMMIT;
@@ -504,5 +528,60 @@ CREATE OR REPLACE PACKAGE BODY ds_oss_account_usg_pkg AS
         WHEN OTHERS THEN
             NULL;
     END update_success_records;
+
+    PROCEDURE update_scope_failure (
+        p_schedule_instance_id IN VARCHAR2
+    ) IS
+        l_err_count NUMBER;
+    BEGIN
+
+        BEGIN
+            SELECT
+                COUNT(*)
+            INTO l_err_count
+            FROM
+                cif_log_messages_tbl
+            WHERE
+                    instance_id = p_schedule_instance_id
+                AND message_severity = 'ERROR';
+
+        END;
+
+        IF l_err_count > 0 THEN
+
+            BEGIN
+
+                UPDATE fusionintegration.oss_accountusage_core_stg
+                SET
+                    schedule_instance_id = p_schedule_instance_id,
+                    process_flag = 'E',
+                    message = 'Please refer table CIF_LOG_MESSAGES_TBL for INSTANCE_ID : ' || p_schedule_instance_id
+                WHERE
+                 process_flag <> 'P';
+
+                COMMIT;
+            END;
+
+            BEGIN
+
+                UPDATE fusionintegration.oss_stitch_payload_stg stitch
+                SET
+                    stitch.status = 'E',
+                    stitch.message = 'Please refer table CIF_LOG_MESSAGES_TBL for INSTANCE_ID : ' || p_schedule_instance_id
+                WHERE
+                 stitch.status <> 'P'
+                and EXISTS (SELECT 1 FROM fusionintegration.oss_accountusage_core_stg where stitch.trackingid = trackingid and process_flag = 'E' and schedule_instance_id = p_schedule_instance_id);
+
+            END;
+
+        END IF;
+
+
+    EXCEPTION
+        WHEN OTHERS THEN
+            dbms_output.put_line(sqlcode);
+            dbms_output.put_line(sqlerrm);
+
+    END update_scope_failure;
 
 END ds_oss_account_usg_pkg;
