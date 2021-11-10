@@ -1,4 +1,28 @@
 create or replace PACKAGE ds_oss_account_usg_pkg AS
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+       DS_OSS_ACCOUNT_USG_PKG TABLE SCRIPT
+       $Version 1.0
+   REM ============================================================================
+   REM
+   REM NAME...: DS_OSS_ACCOUNT_USG_PKG
+   REM
+   REM DESC...: Package to insert values in Account Usage Stage
+   REM
+   REM
+   REM
+   REM
+   REM HISTORY:
+   REM
+   REM WHO                  WHAT                                                 WHEN
+   REM --------------       ----------------------------------------------      ----------
+   REM Rohit Srivastava     Initial Version                                     03/05/2021
+   REM
+   REM ===============================================================================
+   REM
+   REM ===================================================================================
+
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
     TYPE stitch_rec_type IS RECORD (
         record_id       NUMBER,
         run_date_time   TIMESTAMP,
@@ -57,6 +81,10 @@ CREATE OR REPLACE TYPE usagedata_tbl_type AS TABLE OF usagedata_rec_type; */
         p_dsaccountid           IN  VARCHAR2,
         p_uom                   IN  VARCHAR2,
         p_usagedate             IN  VARCHAR2
+    );
+
+     PROCEDURE update_scope_failure (
+       p_schedule_instance_id  IN  VARCHAR2
     );
 
 END ds_oss_account_usg_pkg;
