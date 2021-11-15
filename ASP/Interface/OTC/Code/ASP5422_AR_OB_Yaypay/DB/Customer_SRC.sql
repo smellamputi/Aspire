@@ -78,3 +78,6 @@ INTEGRATION_INTERNAL_ID               VARCHAR2(5000),
 RUN_DATE                              DATE         
 );
 /
+
+ALTER TABLE create_customer_src_tbl ADD country_code VARCHAR2(5000);
+/

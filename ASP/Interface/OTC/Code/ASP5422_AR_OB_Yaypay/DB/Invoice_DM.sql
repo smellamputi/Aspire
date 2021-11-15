@@ -62,3 +62,8 @@ CUSTOMER_ACCOUNT_NUMBER       VARCHAR2(5000),
 CUSTOMER_NAME                 VARCHAR2(5000),  
 RUN_DATE                      DATE          
 );
+/
+
+ALTER TABLE create_invoice_dm_src_tbl ADD obo_shipto_name VARCHAR2(5000);
+
+/
