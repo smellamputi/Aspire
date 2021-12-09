@@ -204,7 +204,8 @@ create or replace PACKAGE BODY                   cif_common_package AS
             p_message_severity,
             p_scope_name,
             p_status,
-            p_error_code,
+            --p_error_code,
+            SUBSTR(p_error_code, 1, 60),
             p_error_message,
             p_error_details,
             p_attribute1,
@@ -798,7 +799,7 @@ create or replace PACKAGE BODY                   cif_common_package AS
                 'INFO',
                 'Start Integration Run - ' || p_integration_name
             );*/
-
+            
             INSERT INTO cif_log_messages_tbl (
                  instance_id,
                  interface_id,
@@ -808,6 +809,7 @@ create or replace PACKAGE BODY                   cif_common_package AS
                 message_severity,
                 scope_name,
                 attribute1  -- process description
+                
             ) VALUES (
                 p_oic_instance_id,
                 p_interface_id,
@@ -817,6 +819,7 @@ create or replace PACKAGE BODY                   cif_common_package AS
                 'INFO',
                 p_scope_name,
                 p_integration_name || ' process logged for - '|| p_scope_name
+               
             );
             COMMIT ;
 
@@ -841,7 +844,7 @@ create or replace PACKAGE BODY                   cif_common_package AS
                 AND integration_pattern = p_integration_pattern ;
         END;
          IF (l_insert_count = 0) THEN
-
+        
         BEGIN
         INSERT INTO cif_process_instance_tbl (
             instance_id,

@@ -22,6 +22,8 @@
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+DROP TABLE FUSIONINTEGRATION.CREATE_CUSTOMER_SRC_TBL;
+/
 
 CREATE TABLE CREATE_CUSTOMER_SRC_TBL(
 CODE_IDENTIFIER                       VARCHAR2(5000), 
@@ -75,4 +77,7 @@ TAX_ID                                VARCHAR2(5000),
 INTEGRATION_INTERNAL_ID               VARCHAR2(5000), 
 RUN_DATE                              DATE         
 );
+/
+
+ALTER TABLE create_customer_src_tbl ADD country_code VARCHAR2(5000);
 /

@@ -16,6 +16,7 @@
    REM WHO                  WHAT                                                 WHEN
    REM --------------       ----------------------------------------------      ----------
    REM Rohit Srivastava     Report Response Table                               03/05/2021
+   REM Rohit Srivastava     Increase datatype length-UAT Defect#ASP8871         11/11/2021				
    REM
    REM ===============================================================================
    REM
@@ -30,12 +31,12 @@ CREATE TABLE "FUSIONINTEGRATION"."OSS_REPORT_RESPONSE_STG" (
     uom                        VARCHAR2(50),
     quantity                   NUMBER,
     usagedate                  VARCHAR2(16),
-    subscription_number        VARCHAR2(30),
-    party_name                 VARCHAR2(30),
+    subscription_number        VARCHAR2(120),
+    party_name                 VARCHAR2(360),
     account_number             VARCHAR2(30),
-    product_name               VARCHAR2(30),
-    subscription_product_puid  VARCHAR2(100),
-    bill_line_puid             VARCHAR2(100),
+    product_name               VARCHAR2(300),
+    subscription_product_puid  VARCHAR2(120),
+    bill_line_puid             VARCHAR2(120),
     usage_start_date           VARCHAR2(10),
     usage_end_date             VARCHAR2(10),
     usage_quantity             NUMBER,

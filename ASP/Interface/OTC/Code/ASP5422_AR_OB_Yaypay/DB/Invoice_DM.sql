@@ -22,6 +22,9 @@
    REM ===================================================================================
 
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+DROP TABLE FUSIONINTEGRATION.CREATE_INVOICE_DM_SRC_TBL;
+/
+
 CREATE TABLE CREATE_INVOICE_DM_SRC_TBL(
 CODE_IDENTIFIER               VARCHAR2(5000),  
 SEQ                           VARCHAR2(5000),  
@@ -59,3 +62,8 @@ CUSTOMER_ACCOUNT_NUMBER       VARCHAR2(5000),
 CUSTOMER_NAME                 VARCHAR2(5000),  
 RUN_DATE                      DATE          
 );
+/
+
+ALTER TABLE create_invoice_dm_src_tbl ADD obo_shipto_name VARCHAR2(5000);
+
+/
